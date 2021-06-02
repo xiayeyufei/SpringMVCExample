@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.example.springmvcexample.mybatis.mapper.SalGradeMapper">
+	<select id="getAllSalGrades" resultType="SalGrade">
+		SELECT * FROM salgrades
+	</select>
+	<select id="getSalGrade" resultType="SalGrade">
+		SELECT * FROM salgrades
+		WHERE
+		grade_level = #{grade_level}
+	</select>
+	<insert id="addSalGrade">
+		INSERT INTO salgrades
+		(grade_level,lowest_salary,highest_salary)
+		VALUES
+		(#{gradeLevel},#{lowestSalary},#{highestSalary})
+	</insert>
+	<update id="chgSalGrade">
+		UPDATE salgrades SET
+		lowest_salary = #{lowestSalary},
+		highest_salary = #{highestSalary}
+		WHERE grade_level = #{gradeLevel}
+	</update>
+	<delete id="delSalGrade" parameterType="string">
+		DELETE FROM salgrades
+		WHERE
+		grade_level
+		= #{gradeLevel}
+	</delete>
+</mapper>

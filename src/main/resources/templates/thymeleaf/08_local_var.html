@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<script src="../../static/bootstrap/js/jquery-3.4.1.min.js" th:src="@{/bootstrap/js/jquery-3.4.1.min.js}"></script>
+<script src="../../static/bootstrap/js/popper.min.js" th:src="@{/bootstrap/js/popper.min.js}"></script>
+<script src="../../static/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<title>局部变量</title>
+</head>
+<body>
+	<div class="container">
+		<h4 class="text-center text-secondary">局部变量</h4>
+		<div class="row justify-content-center">
+			<div class="col-2 border border-dark rounded-lg" th:with="emp=${employees[0]}">
+				<span th:text="${emp.firstName + ' ' + emp.lastName}">Steven King</span><br />
+			</div>
+		</div>
+	</div>
+</body>
+</html>

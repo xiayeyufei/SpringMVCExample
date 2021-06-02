@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springmvcexample.mybatis.mapper.JobHistoryMapper">
+	<resultMap id="JobHistoryResult" type="JobHistory">
+		<id property="id" column="job_history_id" />
+		<result property="startDate" column="start_date" />
+		<result property="endDate" column="end_date" />
+		<association property="employee" javaType="Employee">
+			<id property="id" column="employee_id" />
+			<result property="firstName" column="first_name" />
+			<result property="lastName" column="last_name" />
+			<result property="email" column="email" />
+			<result property="phoneNumber" column="phone_number" />
+			<result property="hireDate" column="hire_date" />
+			<result property="salary" column="salary" />
+			<result property="commissionPct" column="commission_pct" />
+		</association>
+		<association property="job" javaType="Job">
+			<id property="id" column="job_id" />
+			<result property="title" column="job_title" />
+			<result property="minSalary" column="min_salary" />
+			<result property="maxSalary" column="max_salary" />
+		</association>
+		<association property="department" javaType="Department">
+			<id property="id" column="department_id" />
+			<result property="name" column="department_name" />
+		</association>
+	</resultMap>
+	<sql id="selectAll">
+		SELECT
+		jh.job_history_id,
+		jh.employee_id,
+		jh.start_date,
+		jh.end_date,
+		jh.job_id,
+		jh.department_id,
+		e.first_name,
+		e.last_name,
+		e.email,
+		e.phone_number,
+		e.hire_date,
+		e.salary,
+		e.commission_pct,
+		j.job_title,
+		j.min_salary,
+		j.max_salary,
+		d.department_name
+		FROM job_history jh
+		LEFT JOIN employees e ON jh.employee_id =
+		e.employee_id
+		LEFT JOIN jobs j ON jh.job_id = j.job_id
+		LEFT JOIN departments d
+		ON jh.department_id = d.department_id
+	</sql>
+
+	<select id="getAllJobHistories" resultMap="JobHistoryResult">
+		<include refid="selectAll" />
+	</select>
+	<select id="getJobHistory" resultMap="JobHistoryResult">
+		<include refid="selectAll" />
+		WHERE jh.job_history_id = #{id}
+	</select>
+	<insert id="addJobHistory" parameterType="JobHistory" keyProperty="id"
+		keyColumn="job_history_id" useGeneratedKeys="true">
+		INSERT INTO job_history 
+		(employee_id,start_date,end_date,job_id,department_id)
+		VALUES 
+		(#{employee.id},#{startDate},#{endDate},#{job.id},#{department.id})
+	</insert>
+	<update id="chgJobHistory" parameterType="JobHistory">
+		UPDATE job_history SET
+		employee_id = #{employee.id},
+		start_date = #{startDate},
+		end_date = #{endDate},
+		job_id = #{job.id},
+		department_id = #{department.id}
+		WHERE job_history_id = #{id}
+	</update>
+	<delete id="delJobHistory" parameterType="int">
+		DELETE FROM job_history
+		WHERE job_history_id = #{id}
+	</delete>
+
+</mapper>

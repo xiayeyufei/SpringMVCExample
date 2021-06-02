@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<script src="../../static/bootstrap/js/jquery-3.4.1.min.js" th:src="@{/bootstrap/js/jquery-3.4.1.min.js}"></script>
+<script src="../../static/bootstrap/js/popper.min.js" th:src="@{/bootstrap/js/popper.min.js}"></script>
+<script src="../../static/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<title>追加HTML属性值</title>
+</head>
+<body>
+	<div class="container">
+		<h4 class="text-center text-secondary">追加HTML属性值</h4>
+		<div class="row justify-content-center">
+<table class="table" th:attrappend="class=${' ' + table_dark}" th:attrprepend="class=${col_4 + ' '}">
+	<thead>
+		<tr><th scope="col">#</th><th scope="col">First</th><th scope="col">Last</th><th scope="col">Handle</th></tr>
+	</thead>
+	<tbody>
+		<tr><th scope="row">1</th><td>Mark</td><td>Otto</td><td>@mdo</td></tr>
+		<tr><th scope="row">2</th><td>Jacob</td><td>Thornton</td><td>@fat</td></tr>
+	</tbody>
+</table>
+		</div>
+	</div>
+</body>
+</html>

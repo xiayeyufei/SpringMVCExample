@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <script src="../../static/bootstrap/js/jquery-3.4.1.min.js" th:src="@{/bootstrap/js/jquery-3.4.1.min.js}"></script>
+    <script src="../../static/bootstrap/js/popper.min.js" th:src="@{/bootstrap/js/popper.min.js}"></script>
+    <script src="../../static/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <title>表达式工具对象示例</title>
+    <style>
+        caption {
+            padding-top: 1rem; padding-bottom: 0.0rem; color: #343A40;
+            font-size: 1.1em; font-weight: bolder; text-align: center;
+            caption-side: top;
+        }
+
+        th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h4 class="text-center text-secondary">表达式工具对象示例</h4>
+    <div class="row justify-content-center">
+        <table th:unless="${#lists.isEmpty(locations)}" class="col-8 table table-sm table-bordered table-striped">
+            <caption>雇员列表</caption>
+            <thead class="thead-dark">
+            <tr>
+                <th>序号</th>
+                <th>地点</th>
+                <th>编码</th>
+                <th>城市</th>
+                <th>州</th>
+                <th>国家序号</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="loc,stat : ${locations}" class="table-primary" th:class="${stat.odd}? 'table-primary':'table-success'">
+                <td th:text="${#numbers.formatInteger(stat.count,4)}">1</td>
+                <td th:text="${#strings.toUpperCase(loc.streetAddress)}">1297 Via Cola di Rie</td>
+                <td th:text="${#strings.toUpperCase(loc.postalCode)}">00989</td>
+                <td th:text="${#strings.toUpperCase(loc.city)}">Roma</td>
+                <td th:text="${#strings.toUpperCase(loc.stateProvince)}">Tokyo Prefecture/td>
+                <td th:text="${#strings.toUpperCase(loc.country.id)}">25%</td>
+            </tr>
+            <tr>
+                <td colspan="6" class="text-center">总计<span th:text="${#lists.size(locations)}">100</span>条记录
+                </td>
+            </tr>
+            <tr >
+                <td colspan="7" class="text-center">
+                    第<span th:text="${pageNo}"></span>页,每页10条
+                    共<span th:text="${pageCount}"></span>页,
+                    总计<span th:text="${total}"></span>条数据<br/>
+                    <th:block th:each="i:${#numbers.sequence(1,pageCount)}">
+                        <a  th:text="${i}" th:href="@{/location/findlocation/{pageNo}(pageNo=${i})}">
+                            1
+                        </a>
+                    </th:block>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+</body>
+</html>

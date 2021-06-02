@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>文本替换</title>
+<style>
+span {color: red; font-weight: bolder; font-size: 1.5em; font-style: italic;}
+</style>
+</head>
+<body>
+	<p><span th:text="${welcome}">welcome</span> 此消息来自控制器中的Model。</p>
+	<p><span th:text="#{welcome}">welcome</span> 此消息来自国际化信息文件messages_*.properties。</p>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springmvcexample.mybatis.mapper.EmployeeMapper">
+	<resultMap id="EmployeeResult" type="Employee">
+		<id property="id" column="employee_id" />
+		<result property="firstName" column="first_name" />
+		<result property="lastName" column="last_name" />
+		<result property="email" column="email" />
+		<result property="phoneNumber" column="phone_number" />
+		<result property="hireDate" column="hire_date" />
+		<result property="salary" column="salary" />
+		<result property="commissionPct" column="commission_pct" />
+		<result property="manager" column="manager_id" />
+		<association property="job" javaType="Job">
+			<id property="id" column="job_id" />
+			<result property="title" column="job_title" />
+			<result property="minSalary" column="min_salary" />
+			<result property="maxSalary" column="max_salary" />
+		</association>
+		<association property="department" javaType="Department">
+			<id property="id" column="department_id" />
+			<result property="name" column="department_name" />
+			<association property="location" javaType="Location">
+				<id property="id" column="location_id" />
+				<result property="streetAddress" column="street_address" />
+				<result property="postalCode" column="postal_code" />
+				<result property="city" column="city" />
+				<result property="stateProvince" column="state_province" />
+				<association property="country" javaType="Country">
+					<id property="id" column="country_id" />
+					<result property="name" column="country_name" />
+					<association property="region" javaType="Region">
+						<id property="id" column="region_id" />
+						<result property="name" column="region_name" />
+					</association>
+				</association>
+			</association>
+		</association>
+	</resultMap>
+	<sql id="selectAll">
+		SELECT
+		e.employee_id,
+		e.first_name,
+		e.last_name,
+		e.email,
+		e.phone_number,
+		e.hire_date,
+		e.salary,
+		e.commission_pct,
+		e.manager_id,
+		j.job_id,
+		j.job_title,
+		j.min_salary,
+		j.max_salary,
+		d.department_id,
+		d.department_name,
+		l.location_id,
+		l.street_address,
+		l.postal_code,
+		l.city,
+		l.state_province,
+		l.country_id,
+		c.country_name,
+		r.region_id,
+		r.region_name
+		FROM employees e
+		LEFT JOIN jobs j ON e.job_id = j.job_id
+		LEFT JOIN departments d ON e.department_id
+		= d.department_id
+		LEFT JOIN locations l ON d.location_id = l.location_id
+		LEFT
+		JOIN countries c ON l.country_id = c.country_id
+		LEFT JOIN regions r ON
+		c.region_id = r.region_id
+	</sql>
+
+<sql id="orderby">
+<if test="orderBy != null">
+	ORDER BY
+	<foreach item="colName" collection="orderBy" separator=",">
+		${colName}
+	</foreach>
+</if>
+</sql>
+<sql id="limit">
+<if test="pageSize != null ">
+	LIMIT
+	<if test="pageNo != null and (pageNo-1)*pageSize>=0 ">
+		${(pageNo-1)*pageSize},
+	</if>
+	${pageSize}
+</if>
+</sql>
+	<select id="findEmployees" resultMap="EmployeeResult">
+		<include refid="selectAll" />
+		<include refid="orderby" />
+		<include refid="limit" />
+	</select>
+	<select id="getEmployees" resultMap="EmployeeResult">
+		<include refid="selectAll" />
+		WHERE d.department_id = #{department_id}
+	</select>
+	<select id="getAllEmployees" resultMap="EmployeeResult">
+		<include refid="selectAll" />
+	</select>
+	<select id="getEmployee" resultMap="EmployeeResult">
+		<include refid="selectAll" />
+		WHERE e.employee_id =
+		#{id}
+	</select>
+	
+	<insert id="addEmployee" parameterType="Employee" keyProperty="id"
+		keyColumn="employee_id" useGeneratedKeys="true">
+		INSERT INTO employees
+		(first_name,last_name,email,phone_number,hire_date,job_id,salary,commission_pct,manager_id,department_id)
+		VALUES (#{firstName},#{lastName},#{email},#{phoneNumber},#{hireDate},#{job.id},#{salary},#{commissionPct},#{manager},#{department.id})
+	</insert>
+	<update id="chgEmployee" parameterType="Employee">
+		UPDATE employees SET
+		first_name = #{firstName},
+		last_name = #{lastName},
+		email = #{email},
+		phone_number = #{phoneNumber},
+		hire_date = #{hireDate},
+		job_id = #{job.id},
+		salary = #{salary},
+		commission_pct = #{commissionPct},
+		manager_id = #{manager},
+		department_id = #{department.id}
+		WHERE employee_id = #{id}
+	</update>
+	<delete id="delEmployee" parameterType="int">
+		DELETE FROM employees
+		WHERE employee_id
+		= #{id}
+	</delete>	
+</mapper>

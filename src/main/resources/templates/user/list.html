@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <script src="../../static/bootstrap/js/jquery-3.4.1.min.js" th:src="@{/bootstrap/js/jquery-3.4.1.min.js}"></script>
+    <script src="../../static/bootstrap/js/popper.min.js" th:src="@{/bootstrap/js/popper.min.js}"></script>
+    <script src="../../static/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+</head>
+<body>
+<div div class="container">
+    <div class="row justify-content-center">
+        <form th:object="${userSearchForm}" method='POST'>
+            <input type='hidden' th:field="*{paging.pageNo}">
+            <table border="1" >
+                <tr>
+                    <td>账号:</td>
+                    <td><input type='text' th:field="*{account}" placeholder="请输入账号"></td>
+                    <td>
+                        <div th:if="${#fields.hasErrors('account')}" th:errors="*{account}">账号错误</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>姓名:</td>
+                    <td><input type='text' th:field="*{name}" placeholder="请输入姓名" /></td>
+                    <td><div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">账号错误</div></td>
+                </tr>
+                <tr>
+                    <td>性别:</td>
+                    <td>
+                        <input type="radio" th:field="*{sex}" value="男">男
+                        <input type="radio" th:field="*{sex}" value="女">女
+                    </td>
+                    <td><div th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">账号错误</div></td>
+                </tr>
+                <tr>
+                    <td>生日:</td>
+                    <td>
+                        <input type='text' th:field="*{startBirthday}" placeholder="起始日期" />
+                        <input type='text' th:field="*{endBirthday}" placeholder="截止日期" />
+                    </td>
+                    <td>
+                        <div th:if="${#fields.hasErrors('startBirthday')}" th:errors="*{startBirthday}">起始日期错误</div>
+                        <div th:if="${#fields.hasErrors('endBirthday')}" th:errors="*{endBirthday}">截止日期错误</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>月薪:</td>
+                    <td>
+                        <input type='text' th:field="*{minSalary}" placeholder="月薪最小值" />
+                        <input type='text' th:field="*{maxSalary}" placeholder="月薪最大值" />
+                    </td>
+                    <td>
+                        <div th:if="${#fields.hasErrors('minSalary')}" th:errors="*{minSalary}">月薪最小值</div>
+                        <div th:if="${#fields.hasErrors('maxSalary')}" th:errors="*{maxSalary}">月薪最大值</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>权限:</td>
+                    <td>
+                        <input type="checkbox" th:field="*{authorities}" value="读">读
+                        <input type="checkbox" th:field="*{authorities}" value="写">写
+                        <input type="checkbox" th:field="*{authorities}" value="删除">删除
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center">
+                        <input name="search" type="submit" value="搜索" />
+                        <input name="paging.firstPage" type="submit" value="首页" th:if="*{paging.pageNo} gt 1"/>
+                        <input name="paging.previousPage" type="submit" value="前一页" th:if="*{paging.pageNo} gt 2"/>
+                        <span th:text="*{paging.pageNo}">1</span>
+                        /<span th:text="*{paging.pageTotal}">10</span>
+                        <input name="paging.nextPage" type="submit" value="下一页" th:if="*{paging.pageNo&lt;paging.pageTotal-1}"/>
+                        <input name="paging.lastPage" type="submit" value="末页" th:if="*{paging.pageNo&lt;paging.pageTotal}"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <table border="1" class="col-8 table table-sm table-bordered table-striped">
+            <caption>用户列表</caption>
+            <thead class="thead-dark">
+            <tr>
+                <th>序号</th>
+                <th>账号</th>
+                <th>密码</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>生日</th>
+                <th>实发月薪</th>
+                <th>权限</th>
+            </tr>
+            </thead>
+            <tr th:each="user,stat : ${users}">
+                <td th:text="${stat.count}"></td>
+                <td th:text="${user.account}"></td>
+                <td th:text="${user.password}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.sex}"></td>
+                <td th:text="${user.birthday}"></td>
+                <td th:text="${#numbers.formatDecimal(user.salary,0,2)}"></td>
+                <td th:text="${#strings.arrayJoin(user.authorities,',')}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>

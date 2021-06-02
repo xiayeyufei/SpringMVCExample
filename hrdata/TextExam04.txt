@@ -1,0 +1,136 @@
+Accounting 2(人)
+    Accounting Manager 1(人)
+        Shelley Higgins
+    Public Accountant 1(人)
+        William Gietz
+Administration 1(人)
+    Administration Assistant 1(人)
+        Jennifer Whalen
+Executive 3(人)
+    Administration Vice President 2(人)
+        Lex De Haan
+        Neena Kochhar
+    President 1(人)
+        Steven King
+Finance 6(人)
+    Accountant 5(人)
+        Daniel Faviet
+        Ismael Sciarra
+        John Chen
+        Jose Manuel Urman
+        Luis Popp
+    Finance Manager 1(人)
+        Nancy Greenberg
+Human Resources 1(人)
+    Human Resources Representative 1(人)
+        Susan Mavris
+IT 5(人)
+    Programmer 5(人)
+        Alexander Hunold
+        Bruce Ernst
+        David Austin
+        Diana Lorentz
+        Valli Pataballa
+Marketing 2(人)
+    Marketing Manager 1(人)
+        Michael Hartstein
+    Marketing Representative 1(人)
+        Pat Fay
+Public Relations 1(人)
+    Public Relations Representative 1(人)
+        Hermann Baer
+Purchasing 6(人)
+    Purchasing Clerk 5(人)
+        Alexander Khoo
+        Guy Himuro
+        Karen Colmenares
+        Shelli Baida
+        Sigal Tobias
+    Purchasing Manager 1(人)
+        Den Raphaely
+Sales 34(人)
+    Sales Manager 5(人)
+        Alberto Errazuriz
+        Eleni Zlotkey
+        Gerald Cambrault
+        John Russell
+        Karen Partners
+    Sales Representative 29(人)
+        Allan McEwen
+        Alyssa Hutton
+        Amit Banda
+        Charles Johnson
+        Christopher Olsen
+        Clara Vishney
+        Danielle Greene
+        David Bernstein
+        David Lee
+        Elizabeth Bates
+        Ellen Abel
+        Harrison Bloom
+        Jack Livingston
+        Janette King
+        Jonathon Taylor
+        Lindsey Smith
+        Lisa Ozer
+        Louise Doran
+        Mattea Marvins
+        Nanette Cambrault
+        Oliver Tuvault
+        Patrick Sully
+        Peter Hall
+        Peter Tucker
+        Sarath Sewall
+        Sundar Ande
+        Sundita Kumar
+        Tayler Fox
+        William Smith
+Shipping 45(人)
+    Shipping Clerk 20(人)
+        Alana Walsh
+        Alexis Bull
+        Anthony Cabrio
+        Britney Everett
+        Donald OConnell
+        Douglas Grant
+        Girard Geoni
+        Jean Fleaur
+        Jennifer Dilly
+        Julia Dellinger
+        Kelly Chung
+        Kevin Feeney
+        Martha Sullivan
+        Nandita Sarchand
+        Randall Perkins
+        Samuel McCain
+        Sarah Bell
+        Timothy Gates
+        Vance Jones
+        Winston Taylor
+    Stock Clerk 20(人)
+        Curtis Davies
+        Hazel Philtanker
+        Irene Mikkilineni
+        James Landry
+        James Marlow
+        Jason Mallin
+        John Seo
+        Joshua Patel
+        Julia Nayer
+        Ki Gee
+        Laura Bissot
+        Michael Rogers
+        Mozhe Atkinson
+        Peter Vargas
+        Randall Matos
+        Renske Ladwig
+        Stephen Stiles
+        Steven Markle
+        TJ Olson
+        Trenna Rajs
+    Stock Manager 5(人)
+        Adam Fripp
+        Kevin Mourgos
+        Matthew Weiss
+        Payam Kaufling
+        Shanta Vollman

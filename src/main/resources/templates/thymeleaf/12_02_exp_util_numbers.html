@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<script src="../../static/bootstrap/js/jquery-3.4.1.min.js" th:src="@{/bootstrap/js/jquery-3.4.1.min.js}"></script>
+<script src="../../static/bootstrap/js/popper.min.js" th:src="@{/bootstrap/js/popper.min.js}"></script>
+<script src="../../static/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<title>表达式工具对象Numbers</title>
+</head>
+<body>
+	<div class="container">
+		<h4 class="text-center text-secondary">表达式工具对象Numbers</h4>
+		<div class="row justify-content-center">
+			<div class="col-12">
+				num = <span th:text="${num}"></span><br /> numArray =
+				<th:block th:each="num : ${numArray}">
+					<span th:text="${num}"></span>
+				</th:block>
+				<br /> numList =
+				<th:block th:each="num : ${numList}">
+					<span th:text="${num}"></span>
+				</th:block>
+				<br /> numSet =
+				<th:block th:each="num : ${numSet}">
+					<span th:text="${num}"></span>
+				</th:block>
+				<br />
+			</div>
+		</div>
+		<div class="w-100"></div>
+		<div class="row justify-content-center">
+			<table class="col-12 table table-sm table-bordered table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th></th>
+						<th>表达式</th>
+						<th>结果</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th rowspan="4">格式化为整数，默认格式</th>
+						<td>${#numbers.formatInteger(num,5)}</td>
+						<td><span th:text="${#numbers.formatInteger(num,5)}"></span></td>
+					</tr>
+					<tr>
+						<td>${#numbers.arrayFormatInteger(numArray,5)}</td>
+						<td><th:block th:each="num : ${#numbers.arrayFormatInteger(numArray,5)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.listFormatInteger(numList,5)}</td>
+						<td><th:block th:each="num : ${#numbers.listFormatInteger(numList,5)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.setFormatInteger(numSet,5)}</td>
+						<td><th:block th:each="num : ${#numbers.setFormatInteger(numSet,5)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<th rowspan="4">格式化为5位整数，千分位为点</th>
+						<td>${#numbers.formatInteger(num,5,'POINT')}</td>
+						<td><th:block th:each="num : ${#numbers.formatInteger(num,5,'POINT')}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.arrayFormatInteger(numArray,5,'POINT')}</td>
+						<td><th:block th:each="num : ${#numbers.arrayFormatInteger(numArray,5,'POINT')}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.listFormatInteger(numList,5,'POINT')}</td>
+						<td><th:block th:each="num : ${#numbers.listFormatInteger(numList,5,'POINT')}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.setFormatInteger(numSet,5,'POINT')}</td>
+						<td><th:block th:each="num : ${#numbers.setFormatInteger(numSet,5,'POINT')}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<th rowspan="4">格式化为5位整数2位小数</th>
+						<td>${#numbers.formatDecimal(num,5,2)}</td>
+						<td><span th:text="${#numbers.formatDecimal(num,5,2)}"></span></td>
+					</tr>
+					<tr>
+						<td>${#numbers.arrayFormatDecimal(numArray,5,2)}</td>
+						<td><th:block th:each="num : ${#numbers.arrayFormatDecimal(numArray,5,2)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.listFormatDecimal(numList,5,2)}</td>
+						<td><th:block th:each="num : ${#numbers.listFormatDecimal(numList,5,2)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.setFormatDecimal(numSet,5,2)}</td>
+						<td><th:block th:each="num : ${#numbers.setFormatDecimal(numSet,5,2)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<th rowspan="4">格式化为5位整数2位小数，小数符号为逗号</th>
+						<td>${#numbers.formatDecimal(num,5,2,'COMMA')}</td>
+						<td><span th:text="${#numbers.formatDecimal(num,5,2,'COMMA')}"></span></td>
+					</tr>
+					<tr>
+						<td>${#numbers.arrayFormatDecimal(numArray,5,2,'COMMA')}</td>
+						<td><th:block th:each="num : ${#numbers.arrayFormatDecimal(numArray,5,2,'COMMA')}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.listFormatDecimal(numList,5,2,'COMMA')}</td>
+						<td><th:block th:each="num : ${#numbers.listFormatDecimal(numList,5,2,'COMMA')}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.setFormatDecimal(numSet,5,2,'COMMA')}</td>
+						<td><th:block th:each="num : ${#numbers.setFormatDecimal(numSet,5,2,'COMMA')}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<th rowspan="4">格式化为5位整数2位小数，千分位符号为点，小数符号为逗号</th>
+						<td>${#numbers.formatDecimal(num,5,'POINT',2,'COMMA')}</td>
+						<td><span th:text="${#numbers.formatDecimal(num,5,'POINT',2,'COMMA')}"></span></td>
+					</tr>
+					<tr>
+						<td>${#numbers.arrayFormatDecimal(numArray,5,'POINT',2,'COMMA')}</td>
+						<td><th:block th:each="num : ${#numbers.arrayFormatDecimal(numArray,5,'POINT',2,'COMMA')}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.listFormatDecimal(numList,5,'POINT',2,'COMMA')}</td>
+						<td><th:block th:each="num : ${#numbers.listFormatDecimal(numList,5,'POINT',2,'COMMA')}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.setFormatDecimal(numSet,5,'POINT',2,'COMMA')}</td>
+						<td><th:block th:each="num : ${#numbers.setFormatDecimal(numList,5,'POINT',2,'COMMA')}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<th rowspan="4">格式化为本地货币格式</th>
+						<td>${#numbers.formatCurrency(num)}</td>
+						<td><span th:text="${#numbers.formatCurrency(num)}"></span></td>
+					</tr>
+					<tr>
+						<td>${#numbers.arrayFormatCurrency(numArray)}</td>
+						<td><th:block th:each="num : ${#numbers.arrayFormatCurrency(numArray)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.listFormatCurrency(numList)}</td>
+						<td><th:block th:each="num : ${#numbers.listFormatCurrency(numList)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.setFormatCurrency(numSet)}</td>
+						<td><th:block th:each="num : ${#numbers.setFormatCurrency(numSet)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<th rowspan="4">格式化为百分比，10位整数，2位小数</th>
+						<td>${#numbers.formatPercent(num,10,2)}</td>
+						<td><span th:text="${#numbers.formatPercent(num,10,2)}"></span></td>
+					</tr>
+					<tr>
+						<td>${#numbers.arrayFormatPercent(numArray,10,2)}</td>
+						<td><th:block th:each="num : ${#numbers.arrayFormatPercent(numArray,10,2)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.listFormatPercent(numList,10,2)}</td>
+						<td><th:block th:each="num : ${#numbers.listFormatPercent(numList,10,2)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.setFormatPercent(numSet,10,2)}</td>
+						<td><th:block th:each="num : ${#numbers.setFormatPercent(numSet,10,2)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+
+					<tr>
+						<th rowspan="2">创建整数数组</th>
+						<td>${#numbers.sequence(1,10)}</td>
+						<td><th:block th:each="num : ${#numbers.sequence(1,10)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+					<tr>
+						<td>${#numbers.sequence(1,10,2)}</td>
+						<td><th:block th:each="num : ${#numbers.sequence(1,10,2)}">
+								<span th:text="${num}"></span>
+							</th:block></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

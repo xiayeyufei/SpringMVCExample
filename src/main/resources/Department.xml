@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springmvcexample.mybatis.mapper.DepartmentMapper">
+	<resultMap id="DepartmentResult" type="Department">
+		<id property="id" column="department_id" />
+		<result property="name" column="department_name" />
+		<result property="manager" column="manager_id" />
+		<association property="location" javaType="Location">
+			<id property="id" column="location_id" />
+			<result property="streetAddress" column="street_address" />
+			<result property="postalCode" column="postal_code" />
+			<result property="city" column="city" />
+			<result property="stateProvince" column="state_province" />
+			<association property="country" javaType="Country">
+				<id property="id" column="country_id" />
+				<result property="name" column="country_name" />
+				<association property="region" javaType="Region">
+					<id property="id" column="region_id" />
+					<result property="name" column="region_name" />
+				</association>
+			</association>
+		</association>
+	</resultMap>
+	<sql id="selectAll">
+		SELECT
+		d.department_id,
+		d.department_name,
+		d.manager_id,
+		l.location_id,
+		l.street_address,
+		l.postal_code,
+		l.city,
+		l.state_province,
+		l.country_id,
+		c.country_name,
+		r.region_id,
+		r.region_name
+		FROM departments d
+		LEFT JOIN locations
+		l ON d.location_id = l.location_id
+		LEFT JOIN countries c ON
+		l.country_id =
+		c.country_id
+		LEFT JOIN regions r ON c.region_id = r.region_id
+	</sql>
+	<select id="getDepartments" resultMap="DepartmentResult">
+		<include refid="selectAll" />
+		WHERE d.location_id = #{location_id}
+	</select>
+	<select id="getAllDepartments" resultMap="DepartmentResult">
+		<include refid="selectAll" />
+	</select>
+	<select id="getDepartment" resultMap="DepartmentResult">
+		<include refid="selectAll" />
+		WHERE d.department_id =
+		#{id}
+	</select>
+	
+	<insert id="addDepartment" parameterType="Department" keyProperty="id"
+		keyColumn="department_id" useGeneratedKeys="true">
+		INSERT INTO departments
+		(department_name,manager_id,location_id)
+		VALUES (#{name},#{manager},#{location.id})
+	</insert>
+	<update id="chgDepartment" parameterType="Department">
+		UPDATE departments SET
+		department_name = #{name},
+		manager_id = #{manager},
+		location_id = #{location.id}
+		WHERE department_id = #{id}
+	</update>
+	<delete id="delDepartment" parameterType="int">
+		DELETE FROM departments
+		WHERE department_id
+		= #{id}
+	</delete>	
+	
+</mapper>

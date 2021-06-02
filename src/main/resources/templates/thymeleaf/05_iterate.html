@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<script src="../../static/bootstrap/js/jquery-3.4.1.min.js" th:src="@{/bootstrap/js/jquery-3.4.1.min.js}"></script>
+<script src="../../static/bootstrap/js/popper.min.js" th:src="@{/bootstrap/js/popper.min.js}"></script>
+<script src="../../static/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<title>迭代</title>
+<style>
+caption {
+	padding-top: 1rem; padding-bottom: 0.0rem; color: #343A40;
+	font-size: 1.1em; font-weight: bolder; text-align: center;
+	caption-side: top;
+}
+
+th {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h4 class="text-center text-secondary">迭代</h4>
+		<div class="row justify-content-center">
+			<table class="col-6 table table-sm table-bordered table-striped">
+				<caption>雇员列表</caption>
+				<thead class="thead-dark">
+					<tr>
+						<th>序号</th>
+						<th>名</th>
+						<th>姓</th>
+						<th>入职日期</th>
+						<th>基本月薪</th>
+					</tr>
+				</thead>
+				<tbody th:remove="all-but-first">
+					<tr th:each="emp,stat : ${employees}" class="table-primary" th:class="${stat.odd}? 'table-primary':'table-success'">
+						<td th:text="${stat.count}">1</td>
+						<td th:text="${emp.firstName}">Steven</td>
+						<td th:text="${emp.lastName}">King</td>
+						<td th:text="${emp.hireDate}">2003-06-17</td>
+						<td th:text="${emp.salary}" class="text-right">24000.0</td>
+					</tr>
+					<tr class="table-success">
+						<td>2</td>
+						<td>Neena</td>
+						<td>Kochhar</td>
+						<td>2005-09-21</td>
+						<td class="text-right">17000.0</td>
+					</tr>
+					<tr class="table-primary">
+						<td>3</td>
+						<td>Lex</td>
+						<td>De Haan</td>
+						<td>2001-01-13</td>
+						<td class="text-right">17000.0</td>
+					</tr>
+					<tr class="table-success">
+						<td>4</td>
+						<td>Alexander</td>
+						<td>Hunold</td>
+						<td>2006-01-03</td>
+						<td class="text-right">9000.0</td>
+					</tr>
+					<tr class="table-primary">
+						<td>5</td>
+						<td>Bruce</td>
+						<td>Ernst</td>
+						<td>2007-05-21</td>
+						<td class="text-right">6000.0</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="w-100"></div>
+			<table class="col-3 table table-sm table-bordered table-striped">
+				<caption>水果单词列表</caption>
+				<thead class="thead-dark">
+					<tr>
+						<th>英文</th>
+						<th>中文</th>
+					</tr>
+				</thead>
+				<tbody th:remove="all-but-first">
+					<tr th:each="fruit,stat : ${fruits}" class="table-danger" th:class="${stat.odd}? 'table-danger':'table-warning'">
+						<td th:text="${fruit.key}">apple</td>
+						<td th:text="${fruit.value}">苹果</td>
+					</tr>
+					<tr class="table-warning">
+						<td>red cherry</td>
+						<td>红樱桃</td>
+					</tr>
+					<tr class="table-danger">
+						<td>peach</td>
+						<td>桃子</td>
+					</tr>
+					<tr class="table-warning">
+						<td>mango</td>
+						<td>芒果</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

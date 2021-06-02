@@ -1,0 +1,88 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springmvcexample.mybatis.mapper.LocationMapper">
+    <resultMap id="LocationResult" type="Location">
+        <id property="id" column="location_id" />
+        <result property="streetAddress" column="street_address" />
+        <result property="postalCode" column="postal_code" />
+        <result property="city" column="city" />
+        <result property="stateProvince" column="state_province" />
+        <association property="country" javaType="Country">
+            <id property="id" column="country_id" />
+            <result property="name" column="country_name" />
+            <association property="region" javaType="Region">
+                <id property="id" column="region_id" />
+                <result property="name" column="region_name" />
+            </association>
+        </association>
+    </resultMap>
+    <sql id="selectAll">
+        SELECT
+            l.location_id,
+            l.street_address,
+            l.postal_code,
+            l.city,
+            l.state_province,
+            l.country_id,
+            c.country_name,
+            r.region_id,
+            r.region_name
+        FROM
+            locations l
+                LEFT JOIN countries c ON l.country_id = c.country_id
+                LEFT JOIN
+            regions r ON c.region_id = r.region_id
+    </sql>
+    <sql id="orderby">
+        <if test="orderBy != null">
+            ORDER BY
+            <foreach item="colName" collection="orderBy" separator=",">
+                ${colName}
+            </foreach>
+        </if>
+    </sql>
+    <sql id="limit">
+        <if test="pageSize != null ">
+            LIMIT
+            <if test="pageNo != null and (pageNo-1)*pageSize>=0 ">
+                ${(pageNo-1)*pageSize},
+            </if>
+            ${pageSize}
+        </if>
+    </sql>
+    <select id="findLocations" resultMap="LocationResult">
+    <include refid="selectAll" />
+    <include refid="orderby" />
+    <include refid="limit" />
+    </select>
+    <select id="getLocations" resultMap="LocationResult">
+        <include refid="selectAll" />
+        WHERE l.country_id = #{country_id}
+    </select>
+    <select id="getAllLocations" resultMap="LocationResult">
+        <include refid="selectAll" />
+    </select>
+    <select id="getLocation" resultMap="LocationResult">
+        <include refid="selectAll" />
+        WHERE l.location_id =
+        #{id}
+    </select>
+    <insert id="addLocation" parameterType="Location" keyProperty="id"
+            keyColumn="location_id" useGeneratedKeys="true">
+        INSERT INTO locations
+            (street_address,postal_code,city,state_province,country_id)
+        VALUES (#{streetAddress},#{postalCode},#{city},#{stateProvince},#{country.id})
+    </insert>
+    <update id="chgLocation" parameterType="Location">
+        UPDATE locations SET
+                             street_address = #{streetAddress},
+                             postal_code = #{postalCode},
+                             city = #{city},
+                             state_province = #{stateProvince},
+                             country_id =#{country.id}
+        WHERE location_id = #{id}
+    </update>
+    <delete id="delLocation" parameterType="int">
+        DELETE FROM locations
+        WHERE location_id = #{id}
+    </delete>
+</mapper>

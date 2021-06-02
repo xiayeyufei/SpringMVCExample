@@ -1,0 +1,31 @@
+---------------------------------
+|FirstName |LastName  |Salary   |
+---------------------------------
+|Steven    |King      | 24000.00|
+|Lex       |De Haan   | 17000.00|
+|Neena     |Kochhar   | 17000.00|
+|John      |Russell   | 14000.00|
+|Karen     |Partners  | 13500.00|
+|Michael   |Hartstein | 13000.00|
+|Nancy     |Greenberg | 12008.00|
+|Shelley   |Higgins   | 12008.00|
+|Alberto   |Errazuriz | 12000.00|
+|Lisa      |Ozer      | 11500.00|
+|Den       |Raphaely  | 11000.00|
+|Ellen     |Abel      | 11000.00|
+|Gerald    |Cambrault | 11000.00|
+|Clara     |Vishney   | 10500.00|
+|Eleni     |Zlotkey   | 10500.00|
+|Harrison  |Bloom     | 10000.00|
+|Hermann   |Baer      | 10000.00|
+|Janette   |King      | 10000.00|
+|Peter     |Tucker    | 10000.00|
+|Tayler    |Fox       |  9600.00|
+|Danielle  |Greene    |  9500.00|
+|David     |Bernstein |  9500.00|
+|Patrick   |Sully     |  9500.00|
+|Alexander |Hunold    |  9000.00|
+|Allan     |McEwen    |  9000.00|
+|Daniel    |Faviet    |  9000.00|
+|Peter     |Hall      |  9000.00|
+---------------------------------

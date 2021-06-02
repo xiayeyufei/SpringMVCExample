@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+<script src="static/bootstrap/js/jquery-3.4.1.min.js" th:src="@{/bootstrap/js/jquery-3.4.1.min.js}"></script>
+<script src="static/bootstrap/js/popper.min.js" th:src="@{/bootstrap/js/popper.min.js}"></script>
+<script src="static/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<title>标准表达式语法</title>
+<style>
+caption {
+  padding-top: 1rem;padding-bottom: 0.0rem;color: #343A40;font-size:1.1em;font-weight:bolder;
+  text-align: center;caption-side: top;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h4 class="text-center text-secondary">标准表达式语法</h4>
+		<div class="row justify-content-center">
+			<table class="col-6 table table-sm table-bordered table-striped">
+				<caption>模型中的数据</caption>
+				<thead class="thead-dark">
+					<tr>
+						<th>变量名称</th>
+						<th>值</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>num01</td>
+						<td th:text="${num01}">36</td>
+					</tr>
+					<tr>
+						<td>num02</td>
+						<td th:text="${num02}">20</td>
+					</tr>
+					<tr>
+						<td>president</td>
+						<td th:text="${president}">Employee [id=100, firstName=Steven, lastName=King, email=SKING, phoneNumber=515.123.4567,
+								hireDate=2003-06-17, job=President, salary=24000.0, commissionPct=null, manager=null, department=Executive]</td>
+					</tr>
+					<tr>
+						<td>fruits</td>
+						<td th:text="${fruits}">{apple=苹果, red cherry=红樱桃, peach=桃子, mango=芒果}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="w-100"></div>
+			<table class="col-4 table table-sm table-bordered table-striped">
+				<caption>文本输出</caption>
+				<thead class="thead-dark">
+					<tr>
+						<th>表达式</th>
+						<th>值</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>${num01}</td>
+						<td th:text="${num01}">36</td>
+					</tr>
+					<tr>
+						<td>${num02}</td>
+						<td th:text="${num02}">20</td>
+					</tr>
+					<tr>
+						<td>${president.firstName}</td>
+						<td th:text="${president.firstName}">Steven</td>
+					</tr>
+					<tr>
+						<td>${president.hireDate}</td>
+						<td th:text="${president.hireDate}">2001-01-13</td>
+					</tr>
+					<tr>
+						<td>${fruits.apple}</td>
+						<td th:text="${fruits.apple}">草莓</td>
+					</tr>
+					<tr>
+						<td>${fruits.mango}</td>
+						<td th:text="${fruits.mango}">草莓</td>
+					</tr>
+					<tr>
+						<td>${fruits['red cherry']}</td>
+						<td th:text="${fruits['red cherry']}">草莓</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="w-100"></div>
+			<table class="col-8 table table-sm table-bordered table-striped">
+				<caption>字符串拼接</caption>
+				<thead class="thead-dark">
+					<tr>
+						<th>表达式</th>
+						<th>值</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>${president.firstName + ' ' + president.lastName}</td>
+						<td th:text="${president.firstName + ' ' + president.lastName}">Steven King</td>
+					</tr>
+					<tr>
+						<td>|Boss's name is ${president.firstName + ' ' + president.lastName}|</td>
+						<td th:text="|Boss's name is ${president.firstName + ' ' + president.lastName}|">Boss's name is Steven King</td>
+					</tr>
+					<tr>
+						<td>${'Boss''s name is ' + president.firstName + ' ' + president.lastName}</td>
+						<td th:text="${'Boss''s name is ' + president.firstName + ' ' + president.lastName}">Boss's name is Steven King</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="w-100"></div>
+			<table class="col-3 table table-sm table-bordered table-striped">
+				<caption>算数操作</caption>
+				<thead class="thead-dark">
+					<tr>
+						<th>表达式</th>
+						<th>值</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>${num01 + num02}</td>
+						<td th:text="${num01 + num02}">56</td>
+					</tr>
+					<tr>
+						<td>${num01 - num02}</td>
+						<td th:text="${num01 - num02}">16</td>
+					</tr>
+					<tr>
+						<td>${num01 * num02}</td>
+						<td th:text="${num01 * num02}">720</td>
+					</tr>
+					<tr>
+						<td>${num01 / num02}</td>
+						<td th:text="${num01 / num02}">1</td>
+					</tr>
+					<tr>
+						<td>${num01 % num02}</td>
+						<td th:text="${num01 % num02}">16</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="w-100"></div>
+			<table class="col-3 table table-sm table-bordered table-striped">
+				<caption>布尔操作</caption>
+				<thead class="thead-dark">
+					<tr>
+						<th>表达式</th>
+						<th>值</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>${true and true}</td>
+						<td th:text="${true and true}">true</td>
+					</tr>
+					<tr>
+						<td>${true &amp;&amp; true}</td>
+						<td th:text="${true && true}">true</td>
+					</tr>
+					<tr>
+						<td>${true and false}</td>
+						<td th:text="${true and false}">false</td>
+					</tr>
+					<tr>
+						<td>${true &amp;&amp; false}</td>
+						<td th:text="${true && false}">false</td>
+					</tr>
+					<tr>
+						<td>${true or false}</td>
+						<td th:text="${true or false}">true</td>
+					</tr>
+					
+					<tr>
+						<td>${true || false}</td>
+						<td th:text="${true || false}">true</td>
+					</tr>
+					<tr>
+						<td>${false or false}</td>
+						<td th:text="${false or false}">false</td>
+					</tr>
+					<tr>
+						<td>${false || false}</td>
+						<td th:text="${false || false}">false</td>
+					</tr>
+					
+					<tr>
+						<td>${not true}</td>
+						<td th:text="${not true}">false</td>
+					</tr>
+					<tr>
+						<td>${!false}</td>
+						<td th:text="${!false}">true</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="w-100"></div>
+			<table class="col-3 table table-sm table-bordered table-striped">
+				<caption>比较操作</caption>
+				<thead class="thead-dark">
+					<tr>
+						<th>表达式</th>
+						<th>值</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>${num01 > num02}</td>
+						<td th:text="${num01 > num02}">true</td>
+					</tr>
+					<tr>
+						<td>${num01 >= num02}</td>
+						<td th:text="${num01 >= num02}">true</td>
+					</tr>
+					<tr>
+						<td>${num01 &lt; num02}</td>
+						<td th:text="${num01 < num02}">false</td>
+					</tr>
+					<tr>
+						<td>${num01 &lt;= num02}</td>
+						<td th:text="${num01 <= num02}">false</td>
+					</tr>
+					<tr>
+						<td>${num01 == num02}</td>
+						<td th:text="${num01 == num02}">false</td>
+					</tr>
+					<tr>
+						<td>${num01 != num02}</td>
+						<td th:text="${num01 != num02}">true</td>
+					</tr>
+				</tbody>
+			</table>
+ 			<div class="w-100"></div>
+			<table class="col-5 table table-sm table-bordered table-striped">
+				<caption>条件运算</caption>
+				<thead class="thead-dark">
+					<tr>
+						<th>表达式</th>
+						<th>值</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>${president.commissionPct == null} ? '无奖金'</td>
+						<td  th:text="${president.commissionPct==null} ? '无奖金'">有奖金</td>
+					</tr>
+					<tr>
+						<td>${president.commissionPct != null} ? '有奖金' : '无奖金'</td>
+						<td th:text="${president.commissionPct != null} ? '有奖金' : '无奖金'">有奖金</td>
+					</tr>
+					<tr>
+						<td>${president.commissionPct} ?: 0.1</td>
+						<td th:text="${president.commissionPct} ?: 0.1">0.25</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

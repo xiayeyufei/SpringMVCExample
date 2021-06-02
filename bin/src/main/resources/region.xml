@@ -1,0 +1,49 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springmvcexample.mybatis.mapper.RegionMapper">
+ <resultMap id="RegionResult" type="Region">
+  <id property="id" column="region_id" />
+  <result property="name" column="region_name" />
+  <collection property="countries" ofType="Country">
+      <id property="id" column="country_id"/>
+      <result property="name" column="country_name"/>
+      <association property="region" column="region_id" resultMap="RegionResult"/>
+   </collection>
+ </resultMap>
+  <sql id="selectAll">
+  <!-- SELECT * FROM regions -->
+  SELECT r.region_id,r.region_name,c.country_id,c.country_name
+  FROM regions r LEFT JOIN countries c ON r.region_id = c.region_id
+ </sql>
+ <select id="getAllRegions" resultMap="RegionResult">
+  <include refid="selectAll" />
+ </select>
+ <select id="getAllRegionsAsMapList"
+			resultType="map">
+	<include refid="selectAll" />
+</select>
+<select id="getRowCount" resultType="Long">
+  SELECT COUNT(${columnName}) FROM
+  ${tableName}
+ </select>
+  <select id="getRegion" resultMap="RegionResult">
+  <include refid="selectAll" />
+  WHERE r.region_id = #{id}
+ </select>
+ <select id="getAllRegionsAsRegionList"
+			resultType="Region">
+	<include refid="selectAll" />
+	</select>
+ <insert id="addRegion" parameterType="com.example.springmvcexample.mybatis.entity.Region" keyProperty="id" keyColumn="region_id" useGeneratedKeys="true">
+  INSERT
+  INTO regions (region_name) VALUES (#{name})
+ </insert>
+ <update id="chgRegion"
+		parameterType="Region">
+		UPDATE regions SET region_name = #{name} WHERE region_id
+		= #{id}
+	</update>
+	<delete id="delRegion" parameterType="int">
+		DELETE FROM regions WHERE
+		region_id = #{id}
+	</delete>
+</mapper>

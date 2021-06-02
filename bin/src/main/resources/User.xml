@@ -1,0 +1,77 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="om.example.springmvcexample.mybatis.mapper.UserMapper">
+ <resultMap id="UserMap" type="User">
+  <id column="id" property="id" />
+  <result column="account" property="account" />
+  <result column="password" property="password" />
+  <result column="name" property="name" />
+  <result column="sex" property="sex" />
+  <result column="birthday" property="birthday" />
+  <result column="salary" property="salary" />
+  <result column="authorities" property="authorities"
+   typeHandler="com.example.springmvcexample.mybatis.typehandle.StringArrayTypeHandler" />
+ </resultMap>
+  <sql id="selectAll">
+  SELECT * FROM users
+ </sql>
+  <sql id="where">
+  <where>
+   <if test="account != null">AND account LIKE CONCAT('%',#{account},'%')</if>
+   <if test="name != null">AND name LIKE CONCAT('%',#{name},'%')</if>
+   <if test="sex != null">AND sex = #{sex}</if>
+   <if test="startBirthday != null">AND birthday &gt;= #{startBirthday}</if>
+   <if test="endBirthday != null">AND birthday &lt; #{endBirthday}</if>
+   <if test="minSalary != null">AND salary &gt;= #{minSalary}</if>
+   <if test="maxSalary != null">AND salary &lt; #{maxSalary}</if>
+   <if test="authorities != null">
+    <foreach item="authority" collection="authorities">
+     AND authorities LIKE
+     CONCAT('%',#{authority},'%')
+    </foreach>
+   </if>
+  </where>
+ </sql>
+ <sql id="orderby">
+  <if test="orderBy != null">
+   ORDER BY
+   <foreach item="colName" collection="orderBy" separator=",">
+    ${colName}
+   </foreach>
+  </if>
+ </sql>
+ <sql id="limit">
+  <if test="pageSize != null ">
+   LIMIT
+   <if test="pageNo != null and (pageNo-1)*pageSize>=0 ">
+    ${(pageNo-1)*pageSize},
+   </if>
+   ${pageSize}
+  </if>
+ </sql>
+ <select id="findUsers" resultMap="UserMap">
+  <include refid="selectAll" />
+  <include refid="where" />
+  <include refid="orderby" />
+  <include refid="limit" />
+ </select>
+  <select id="getUserByAccount" resultMap="UserMap">
+  <include refid="selectAll" />
+  WHERE account = #{account} LIMIT 1
+ </select>
+  <insert id="addUser" parameterType="User" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
+  INSERT INTO users
+  (account,password,name,sex,birthday,salary,authorities)
+  VALUES (
+  #{account},
+  #{password},
+  #{name},
+  #{sex},
+  #{birthday},
+  #{salary},
+  #{authorities,typeHandler=com.example.demo.mybatis.typehandler.StringArrayTypeHandler}
+  )
+ </insert>
+  <delete id="delAllUser">
+  DELETE FROM users
+ </delete>
+</mapper>

@@ -1,0 +1,27 @@
+caption {
+	font-size: xx-large;
+	color: #DC143C;
+}
+
+oddrow {
+	background-color: #eeeeee;
+}
+
+evenrow {
+	background-color: #ffffff;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid #708090;
+}
+
+th {
+	text-align: left; font-size : 1em;
+	background-color: #008080;
+	color: white;
+	font-size: 1em;
+}
