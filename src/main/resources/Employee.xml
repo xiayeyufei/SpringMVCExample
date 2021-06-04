@@ -41,62 +41,97 @@
 	</resultMap>
 	<sql id="selectAll">
 		SELECT
-		e.employee_id,
-		e.first_name,
-		e.last_name,
-		e.email,
-		e.phone_number,
-		e.hire_date,
-		e.salary,
-		e.commission_pct,
-		e.manager_id,
-		j.job_id,
-		j.job_title,
-		j.min_salary,
-		j.max_salary,
-		d.department_id,
-		d.department_name,
-		l.location_id,
-		l.street_address,
-		l.postal_code,
-		l.city,
-		l.state_province,
-		l.country_id,
-		c.country_name,
-		r.region_id,
-		r.region_name
+			e.employee_id,
+			e.first_name,
+			e.last_name,
+			e.email,
+			e.phone_number,
+			e.hire_date,
+			e.salary,
+			e.commission_pct,
+			e.manager_id,
+			j.job_id,
+			j.job_title,
+			j.min_salary,
+			j.max_salary,
+			d.department_id,
+			d.department_name,
+			l.location_id,
+			l.street_address,
+			l.postal_code,
+			l.city,
+			l.state_province,
+			l.country_id,
+			c.country_name,
+			r.region_id,
+			r.region_name
 		FROM employees e
-		LEFT JOIN jobs j ON e.job_id = j.job_id
-		LEFT JOIN departments d ON e.department_id
-		= d.department_id
-		LEFT JOIN locations l ON d.location_id = l.location_id
-		LEFT
-		JOIN countries c ON l.country_id = c.country_id
-		LEFT JOIN regions r ON
-		c.region_id = r.region_id
+				 LEFT JOIN jobs j ON e.job_id = j.job_id
+				 LEFT JOIN departments d ON e.department_id
+			= d.department_id
+				 LEFT JOIN locations l ON d.location_id = l.location_id
+				 LEFT
+					 JOIN countries c ON l.country_id = c.country_id
+				 LEFT JOIN regions r ON
+			c.region_id = r.region_id
 	</sql>
-
-<sql id="orderby">
-<if test="orderBy != null">
-	ORDER BY
-	<foreach item="colName" collection="orderBy" separator=",">
-		${colName}
-	</foreach>
-</if>
-</sql>
-<sql id="limit">
-<if test="pageSize != null ">
-	LIMIT
-	<if test="pageNo != null and (pageNo-1)*pageSize>=0 ">
-		${(pageNo-1)*pageSize},
-	</if>
-	${pageSize}
-</if>
-</sql>
+	<sql id="where">
+		<where>
+			<if test="first_name !=null">  e.first_name LIKE CONCAT('%',#{first_name},'%')</if>
+			<if test="last_name !=null"> AND e.last_name LIKE CONCAT('%',#{last_name},'%')</if>
+			<if test="email !=null"> AND e.email LIKE CONCAT('%',#{email},'%')</if>
+			<if test="phone_number !=null"> AND e.phone_number LIKE CONCAT('%',#{phone_number},'%')</if>
+			<if test="starthire_date != null">AND e.hire_date &gt;= #{starthire_date}</if>
+			<if test="endhire_date != null">AND e.hire_date &lt; #{endhire_date}</if>
+			<if test="job !=null"> AND j.job_title LIKE CONCAT('%',#{job},'%')</if>
+			<if test="minSalary != null">AND e.salary &gt;= #{minSalary}</if>
+			<if test="maxSalary != null">AND e.salary &lt; #{maxSalary}</if>
+			<if test="commission_pct !=null"> AND e.commission_pct LIKE CONCAT('%',#{commission_pct},'%')</if>
+			<if test="manager_id !=null"> AND e.manager_id LIKE CONCAT('%',#{manager_id},'%')</if>
+			<if test="department_name !=null"> AND d.department_name LIKE CONCAT('%',#{department_name},'%')</if>
+		</where>
+	</sql>
+	<sql id="rowCount">
+		SELECT COUNT(EMPLOYEE_ID) FROM employees
+	</sql>
+	<sql id="orderby">
+		<if test="orderBy != null">
+			ORDER BY
+			<foreach item="colName" collection="orderBy" separator=",">
+				${colName}
+			</foreach>
+		</if>
+	</sql>
+	<sql id="limit">
+		<if test="pageSize != null ">
+			LIMIT
+			<if test="pageNo != null and (pageNo-1)*pageSize>=0 ">
+				${(pageNo-1)*pageSize},
+			</if>
+			${pageSize}
+		</if>
+	</sql>
+	<sql id="ecount">
+		SELECT COUNT(e.EMPLOYEE_ID)
+		FROM employees e
+				 LEFT JOIN jobs j ON e.job_id = j.job_id
+				 LEFT JOIN departments d ON e.department_id
+			= d.department_id
+				 LEFT JOIN locations l ON d.location_id = l.location_id
+				 LEFT
+					 JOIN countries c ON l.country_id = c.country_id
+				 LEFT JOIN regions r ON
+			c.region_id = r.region_id
+	</sql>
 	<select id="findEmployees" resultMap="EmployeeResult">
 		<include refid="selectAll" />
+		<include refid="where"/>
 		<include refid="orderby" />
 		<include refid="limit" />
+	</select>
+	<select id="getEmployeeCount" resultType="long">
+		<include refid="ecount" />
+		<include refid="where" />
 	</select>
 	<select id="getEmployees" resultMap="EmployeeResult">
 		<include refid="selectAll" />
@@ -110,30 +145,29 @@
 		WHERE e.employee_id =
 		#{id}
 	</select>
-	
 	<insert id="addEmployee" parameterType="Employee" keyProperty="id"
-		keyColumn="employee_id" useGeneratedKeys="true">
+			keyColumn="employee_id" useGeneratedKeys="true">
 		INSERT INTO employees
 		(first_name,last_name,email,phone_number,hire_date,job_id,salary,commission_pct,manager_id,department_id)
 		VALUES (#{firstName},#{lastName},#{email},#{phoneNumber},#{hireDate},#{job.id},#{salary},#{commissionPct},#{manager},#{department.id})
 	</insert>
 	<update id="chgEmployee" parameterType="Employee">
 		UPDATE employees SET
-		first_name = #{firstName},
-		last_name = #{lastName},
-		email = #{email},
-		phone_number = #{phoneNumber},
-		hire_date = #{hireDate},
-		job_id = #{job.id},
-		salary = #{salary},
-		commission_pct = #{commissionPct},
-		manager_id = #{manager},
-		department_id = #{department.id}
+							 first_name = #{firstName},
+							 last_name = #{lastName},
+							 email = #{email},
+							 phone_number = #{phoneNumber},
+							 hire_date = #{hireDate},
+							 job_id = #{job.id},
+							 salary = #{salary},
+							 commission_pct = #{commissionPct},
+							 manager_id = #{manager},
+							 department_id = #{department.id}
 		WHERE employee_id = #{id}
 	</update>
 	<delete id="delEmployee" parameterType="int">
 		DELETE FROM employees
 		WHERE employee_id
-		= #{id}
-	</delete>	
+				  = #{id}
+	</delete>
 </mapper>
