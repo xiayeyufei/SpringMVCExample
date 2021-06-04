@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <script src="../../static/bootstrap/js/jquery-3.4.1.min.js" th:src="@{/bootstrap/js/jquery-3.4.1.min.js}"></script>
+    <script src="../../static/bootstrap/js/popper.min.js" th:src="@{/bootstrap/js/popper.min.js}"></script>
+    <script src="../../static/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <title>雇员列表</title>
+    <style>
+        caption {
+            padding-top: 1rem; padding-bottom: 1rem; color: #343A40;
+            font-size: 1.1em; font-weight: bolder; text-align: center;
+            caption-side: top;
+        }
+
+        th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<form th:object="${employeeSearchForm}" method='POST'>
+    <input type='hidden' th:field="*{paging.pageNo}">
+    <table border="0" align="center" width="1080px" cellspacing="0" cellpadding="10" bordercolor="blue" style="margin-top: 1rem">
+        <tr>
+            <td colspan="3">
+                <input name="search" type="submit" value="搜索" />
+            </td>
+        </tr>
+        <tr>
+            <td>姓氏:</td>
+            <td><input type='text' th:field="*{first_name}" placeholder="请输入姓氏" />
+            </td>
+            <td>
+                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('first_name')}" th:errors="*{first_name}">姓氏错误</div>
+            </td>
+        </tr>
+        <tr>
+            <td>名称:</td>
+            <td><input type='text' th:field="*{last_name}" placeholder="请输入名称" />
+            </td>
+            <td>
+                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('last_name')}" th:errors="*{last_name}">名称错误</div>
+            </td>
+        </tr>
+        <tr>
+            <td>邮箱:</td>
+            <td><input type='text' th:field="*{email}" placeholder="请输入邮箱" />
+            </td>
+            <td>
+                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">邮箱错误</div>
+            </td>
+        </tr>
+        <tr>
+            <td>电话号码:</td>
+            <td><input type='text' th:field="*{phoneNumber}" placeholder="请输入电话号码" />
+            </td>
+            <td>
+                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">电话号码错误</div>
+            </td>
+        </tr>
+        <tr>
+            <td>雇佣日期:</td>
+            <td>
+                <input type='text' th:field="*{starthiredate}" placeholder="雇佣日期:yyyy-mm-dd" />
+                <input type='text' th:field="*{endhiredate}" placeholder="雇佣日期:yyyy-mm-dd" />
+            </td>
+            <td>
+                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('starthiredate')}" th:errors="*{starthiredate}">雇佣日期错误</div>
+                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('endhiredate')}" th:errors="*{endhiredate}">雇佣日期错误</div>
+            </td>
+        </tr>
+        <tr>
+            <td>月薪:</td>
+            <td>
+                <input type='text' th:field="*{minSalary}" placeholder="月薪最小值"/>
+                <input type='text' th:field="*{maxSalary}" placeholder="月薪最大值"/>
+            </td>
+            <td>
+                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('minSalary')}" th:errors="*{minSalary}">月薪最小值错误</div>
+                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('maxSalary')}" th:errors="*{maxSalary}">月薪最大值错误</div>
+            </td>
+        </tr>
+        <tr>
+            <td>工作:</td>
+            <td>
+                <input type='text' th:field="*{job}" placeholder="工作" />
+            </td>
+            <td>
+                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('job')}" th:errors="*{job}">工作错误</div>
+            </td>
+        </tr>
+        <tr>
+            <td>经理ID:</td>
+            <td>
+                <input type='text' th:field="*{managerId}" placeholder="经理ID" />
+            </td>
+            <td>
+                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}">经理ID错误</div>
+            </td>
+        </tr>
+        <tr>
+            <td>部门:</td>
+            <td>
+                <input type='text' th:field="*{department}" placeholder="部门" />
+            </td>
+            <td>
+                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('department')}" th:errors="*{department}">部门错误</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center">
+                <input name="paging.firstPage" type="submit" value="首页" th:if="*{paging.pageNo} gt 1"/>
+                <input name="paging.previousPage" type="submit" value="前一页" th:if="*{paging.pageNo} gt 2"/>
+                <span th:text="*{paging.pageNo}">1</span>
+                /<span th:text="*{paging.pageTotal}">10</span>
+                <input name="paging.nextPage" type="submit" value="下一页" th:if="*{paging.pageNo&lt;paging.pageTotal-1}"/>
+                <input name="paging.lastPage" type="submit" value="末页" th:if="*{paging.pageNo&lt;paging.pageTotal}"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<br>
+<table align="center" width="1080px" border="1" bordercolor="black" cellspacing="0" cellpadding="10"
+       class="col-10 table table-sm table-bordered table-striped">
+    <caption>雇员列表<br></caption>
+    <thead class="thead-dark">
+    <tr>
+        <th>序号</th>
+        <th>姓氏</th>
+        <th>名称</th>
+        <th>邮箱</th>
+        <th>电话号码</th>
+        <th>雇佣日期</th>
+        <th>工作</th>
+        <th>经理ID</th>
+        <th>部门</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="emp,stat:${employees}">
+        <td th:text="${stat.count}"></td>
+        <td th:text="${emp.firstName}"></td>
+        <td th:text="${emp.lastName}"></td>
+        <td th:text="${emp.email}"></td>
+        <td th:text="${emp.phoneNumber}"></td>
+        <td th:text="${emp.hireDate}"></td>
+        <td th:text="${emp.job.title}"></td>
+        <td th:text="${emp.manager}"></td>
+        <td th:text="${emp.department.name}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -152,6 +152,7 @@ public class UserController {
             long userCount = userMapper.getUserCount(userSearchForm.getAccount(), userSearchForm.getName(),
                     userSearchForm.getSex(), userSearchForm.getStartBirthday(), userSearchForm.getEndBirthday(),
                     userSearchForm.getMinSalary(), userSearchForm.getMaxSalary(), userSearchForm.getAuthorities());
+
             int pageTotal = (int) Math.ceil(userCount * 1.0 / 10);
             userSearchForm.getPaging().setPageTotal(pageTotal);
             List<User> users = userMapper.findUsers(userSearchForm.getAccount(), userSearchForm.getName(),

@@ -153,14 +153,14 @@ public class ThymeleafController {
         model.addAttribute("numSet", numSet);
         return "/thymeleaf/12_02_exp_util_numbers";
     }
-    @GetMapping(value = "/employees/{pageno}")
-    public String findEmployees(@PathVariable int pageno, Model model) {
-        List<Employee> employees = employeeMapper.findEmployees(null, pageno, 10);
-        long total =commonMapper.getRowCount("employees","employee_id");
-        model.addAttribute("employees", employees);
-        model.addAttribute("pageno",pageno);
-        model.addAttribute("total",total);
-        return "/thymeleaf/employees";
-    }
+//    @GetMapping(value = "/employees/{pageno}")
+//    public String findEmployees(@PathVariable int pageno, Model model) {
+//        List<Employee> employees = employeeMapper.findEmployees(null, pageno, 10);
+//        long total =commonMapper.getRowCount("employees","employee_id");
+//        model.addAttribute("employees", employees);
+//        model.addAttribute("pageno",pageno);
+//        model.addAttribute("total",total);
+//        return "/thymeleaf/employees";
+//    }
 
 }
