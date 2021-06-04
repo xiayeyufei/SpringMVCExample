@@ -104,4 +104,11 @@
  <delete id="delAllUser">
   DELETE FROM users
  </delete>
+ <delete id="delUserById" parameterType="long">
+  DELETE FROM users
+  WHERE
+    id
+    =
+    #{id}
+ </delete>
 </mapper>

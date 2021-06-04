@@ -91,8 +91,9 @@
                 <th>姓名</th>
                 <th>性别</th>
                 <th>生日</th>
-                <th>实发月薪</th>
+                <th>月薪</th>
                 <th>权限</th>
+                <th><a th:href="@{addchg}" href="form.html ">添加</a></th>
             </tr>
             </thead>
             <tr th:each="user,stat : ${users}">
@@ -104,6 +105,11 @@
                 <td th:text="${user.birthday}"></td>
                 <td th:text="${#numbers.formatDecimal(user.salary,0,2)}"></td>
                 <td th:text="${#strings.arrayJoin(user.authorities,',')}"></td>
+                <td>
+                    <a th:href="@{addchg(id=${user.id})}" href=" ">修改</a>
+                    <a href=" " th:href="@{del(id=${user.id})}" onclick="return confirm('确实要删除 apple 吗?');"
+                    th:onclick="return confirm('确实要删除 '+[[${user.account}]] + ' 吗?');">删除</a>
+                </td>
             </tr>
         </table>
     </div>

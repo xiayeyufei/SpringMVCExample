@@ -25,4 +25,6 @@ public interface UserMapper {
 
 	User getUserById(long id);
 	public int chgUser(User user);
+	public int delUserById(long id);
+
 }

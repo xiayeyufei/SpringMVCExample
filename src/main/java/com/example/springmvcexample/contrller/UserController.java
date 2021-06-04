@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.util.StringUtils;
 
@@ -181,6 +182,12 @@ public class UserController {
         authorityList.add("写");
         authorityList.add("删除");
         return authorityList;
+    }
+    @GetMapping("/del")
+    public ModelAndView del(ModelAndView view, @RequestParam long id) {
+        userMapper.delUserById(id);
+        view.setViewName("redirect:list");
+        return view;
     }
 
 }
