@@ -114,7 +114,9 @@ public class UserController {
         return "user/form";
     }
     @GetMapping("/detail")
-    public String getUserById() {
+    public String getUserById(Model model, @RequestParam long id) {
+        User user = userMapper.getUserById(id);
+        model.addAttribute(user);
         return "user/detail";
     }
     @GetMapping("/add")

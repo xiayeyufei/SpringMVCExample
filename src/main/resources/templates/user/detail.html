@@ -11,5 +11,40 @@
 <body>
 	用户详细信息
 </body>
+<table th:object="${user}" align="center">
+	<caption class="text-center">用户信息</caption>
+	<tr>
+		<td>主键：</td>
+		<td th:text="*{id}">1001</td>
+	<tr>
+	<tr>
+		<td>账号：</td>
+		<td th:text="*{account}">1001</td>
+	<tr>
+	<tr>
+		<td>密码：</td>
+		<td th:text="*{password}">1001</td>
+	<tr>
+	<tr>
+		<td>姓名：</td>
+		<td th:text="*{name}">1001</td>
+	<tr>
+	<tr>
+		<td>性别：</td>
+		<td th:text="*{sex}">1001</td>
+	<tr>
+	<tr>
+		<td>生日：</td>
+		<td th:text="*{birthday}">1001</td>
+	<tr>
+	<tr>
+		<td>工资：</td>
+		<td th:text="*{#numbers.formatDecimal(salary,0,2)}">1001</td>
+	<tr>
+	<tr>
+		<td>权限：</td>
+		<td th:text="*{#strings.arrayJoin(authorities,',')}">1001</td>
+	<tr>
+</table>
 
 </html>
