@@ -23,4 +23,6 @@ public interface UserMapper {
 							 @Param("minSalary") Double minSalary, @Param("maxSalary") Double maxSalary,
 							 @Param("authorities") String[] authorities);
 
+	User getUserById(long id);
+	public int chgUser(User user);
 }

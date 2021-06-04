@@ -11,10 +11,10 @@
   <result column="authorities" property="authorities"
    typeHandler="com.example.springmvcexample.mybatis.typehandle.StringArrayTypeHandler" />
  </resultMap>
-  <sql id="selectAll">
+ <sql id="selectAll">
   SELECT * FROM users
  </sql>
-  <sql id="where">
+ <sql id="where">
   <where>
    <if test="account != null">AND account LIKE CONCAT('%',#{account},'%')</if>
    <if test="name != null">AND name LIKE CONCAT('%',#{name},'%')</if>
@@ -30,6 +30,9 @@
     </foreach>
    </if>
   </where>
+ </sql>
+ <sql id="rowCount">
+  SELECT COUNT(id) FROM users
  </sql>
  <sql id="orderby">
   <if test="orderBy != null">
@@ -52,36 +55,53 @@
   <include refid="rowCount" />
   <include refid="where" />
  </select>
- <sql id="rowCount">
-  SELECT COUNT(id) FROM users
- </sql>
+ <select id="findall" resultMap="UserMap">
+  <include refid="selectAll" />
+ </select>
  <select id="findUsers" resultMap="UserMap">
   <include refid="selectAll" />
   <include refid="where" />
   <include refid="orderby" />
   <include refid="limit" />
  </select>
- <select id="getAllUser" resultMap="UserMap">
-  <include refid="selectAll"></include>
- </select>
-  <select id="getUserByAccount" resultMap="UserMap">
+ <select id="getUserByAccount" resultMap="UserMap">
   <include refid="selectAll" />
   WHERE account = #{account} LIMIT 1
  </select>
-  <insert id="addUser" parameterType="User" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
+ <select id="getUserById" resultMap="UserMap">
+  <include refid="selectAll" />
+  WHERE id = #{id}
+ </select>
+ <insert id="addUser" parameterType="User" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
   INSERT INTO users
-  (account,password,name,sex,birthday,salary,authorities)
+   (account,password,name,sex,birthday,salary,authorities)
   VALUES (
-  #{account},
-  #{password},
-  #{name},
-  #{sex},
-  #{birthday},
-  #{salary},
-  #{authorities,typeHandler=com.example.springmvcexample.mybatis.typehandle.StringArrayTypeHandler}
-  )
+          #{account},
+          #{password},
+          #{name},
+          #{sex},
+          #{birthday},
+          #{salary},
+          #{authorities,typeHandler=com.example.springmvcexample.mybatis.typehandle.StringArrayTypeHandler}
+         )
  </insert>
-  <delete id="delAllUser">
+ <update id="chgUser" parameterType="User">
+  UPDATE users
+  SET
+   account =
+    #{account},
+   password = #{password},
+   name = #{name},
+   sex
+    = #{sex},
+   birthday = #{birthday},
+   salary = #{salary},
+   authorities =
+    #{authorities,typeHandler=com.example.springmvcexample.mybatis.typehandle.StringArrayTypeHandler}
+  WHERE id
+         = #{id}
+ </update>
+ <delete id="delAllUser">
   DELETE FROM users
  </delete>
 </mapper>

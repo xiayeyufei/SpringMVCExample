@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>编辑用户</title>
+</head>
+
+<body>
+
+<form th:object="${user}" method='POST'>
+	<input type='hidden' th:field="*{id}">
+	<table>
+		<tr>
+			<th colspan="3" th:text="${a}"></th>
+		</tr>
+		<tr>
+			<td colspan="3" align="center">
+				<span th:if="${#fields.hasErrors('global')}" th:errors="*{global}">添加用户失败了</span>
+			</td>
+		</tr>
+		<tr>
+			<td>账号:</td>
+			<td><input type="text" th:field="*{account}" value="apple" placeholder="账号"></td>
+			<td><span th:if="${#fields.hasErrors('account')}" th:errors="*{account}">账号错误</span></td>
+		</tr>
+		<tr>
+			<td>密码:</td>
+			<td><input type="text" th:field="*{password}" value="apple" placeholder="密码"></td>
+			<td><span class="col-auto" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">密码错误</span></td>
+		</tr>
+		<tr>
+			<td>确认密码:</td>
+			<td><input type="text" th:field="*{confirmPassword}" value="apple" placeholder="确认密码"></td>
+			<td><span class="col-auto" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">确认密码错误</span></td>
+		</tr>
+		<tr>
+			<td>姓名:</td>
+			<td><input type="text" th:field="*{name}" value="apple" placeholder="姓名"></td>
+			<td><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">姓名错误</span></td>
+		</tr>
+		<tr>
+			<td>性别:</td>
+			<td th:remove="all-but-first">
+				<!--/*/
+                    <span th:each="sex:${sexList}">
+                        <input type="radio" th:field="*{sex}" th:value="${sex}">
+                        <label th:text="${sex}" th:for="${#ids.prev('sex')}">男</label>
+                    </span>
+                /*/-->
+				<span>
+					<input name="sex" type="radio" value="男">男
+					<input name="sex" type="radio" value="女">女
+					</span>
+			</td>
+			<td><span th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">性别错误</span></td>
+		</tr>
+		<tr>
+			<td>生日:</td>
+			<td>
+				<input type='text' th:field="*{birthday}" placeholder="生日日期" />
+			</td>
+			<td>
+				<span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">生日日期错误</span>
+			</td>
+		</tr>
+		<tr>
+			<td>月薪:</td>
+			<td>
+				<input type='text' th:field="*{salary}" placeholder="月薪" />
+			</td>
+			<td>
+				<span th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}">月薪错误</span>
+			</td>
+		</tr>
+		<tr>
+			<td>权限:</td>
+			<td th:remove="all-but-first">
+				<!--/*/
+                    <span th:each="authority:${authorityList}">
+                        <input type="checkbox" th:field="*{authorities}" th:value="${authority}" >
+                        <label th:text="${authority}" th:for="${#ids.prev('authorities')}">读</label>
+                    </span>
+                /*/-->
+				<span>
+					<input type="checkbox" th:field="*{authorities}" value="读">读
+					<input type="checkbox" th:field="*{authorities}" value="写">写
+					<input type="checkbox" th:field="*{authorities}" value="删除">删除
+					</span>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td colspan="3" align="center"><input name="search" type="submit" value="确定" /></td>
+		</tr>
+	</table>
+	<form>
+</body>
+</html>
