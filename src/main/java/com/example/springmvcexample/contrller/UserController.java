@@ -1,5 +1,6 @@
 package com.example.springmvcexample.contrller;
 
+import com.example.springmvcexample.form.LoginForm;
 import com.example.springmvcexample.form.UserSearchForm;
 import com.example.springmvcexample.mybatis.entity.User;
 import com.example.springmvcexample.mybatis.mapper.UserMapper;
@@ -13,8 +14,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -147,22 +150,34 @@ public class UserController {
         return "user/form";
     }
     @RequestMapping("/list")
-    public String list(HttpServletRequest hsr, @Valid UserSearchForm userSearchForm, BindingResult bindingResult, Model model){
+    public String list(HttpServletRequest hsr, @Valid UserSearchForm userSearchForm, BindingResult bindingResult, HttpSession httpSession,Model model){
+        User user = (User)httpSession.getAttribute("user");
+        if(user == null) {
+            return "redirect:login";
+        }
         if (!bindingResult.hasErrors()) {
-            long userCount = userMapper.getUserCount(userSearchForm.getAccount(), userSearchForm.getName(),
-                    userSearchForm.getSex(), userSearchForm.getStartBirthday(), userSearchForm.getEndBirthday(),
-                    userSearchForm.getMinSalary(), userSearchForm.getMaxSalary(), userSearchForm.getAuthorities());
+            if (Arrays.asList(user.getAuthorities()).contains("读取")){
+                long userCount = userMapper.getUserCount(userSearchForm.getAccount(), userSearchForm.getName(),
+                        userSearchForm.getSex(), userSearchForm.getStartBirthday(), userSearchForm.getEndBirthday(),
+                        userSearchForm.getMinSalary(), userSearchForm.getMaxSalary(), userSearchForm.getAuthorities());
 
-            int pageTotal = (int) Math.ceil(userCount * 1.0 / 10);
-            userSearchForm.getPaging().setPageTotal(pageTotal);
-            List<User> users = userMapper.findUsers(userSearchForm.getAccount(), userSearchForm.getName(),
-                    userSearchForm.getSex(), userSearchForm.getStartBirthday(), userSearchForm.getEndBirthday(),
-                    userSearchForm.getMinSalary(), userSearchForm.getMaxSalary(), userSearchForm.getAuthorities(),
-                    null, userSearchForm.getPaging().getPageNo(),
-                    userSearchForm.getPaging().getPageSize());
-            model.addAttribute("users", users);
+                int pageTotal = (int) Math.ceil(userCount * 1.0 / 10);
+                userSearchForm.getPaging().setPageTotal(pageTotal);
+                List<User> users = userMapper.findUsers(userSearchForm.getAccount(), userSearchForm.getName(),
+                        userSearchForm.getSex(), userSearchForm.getStartBirthday(), userSearchForm.getEndBirthday(),
+                        userSearchForm.getMinSalary(), userSearchForm.getMaxSalary(), userSearchForm.getAuthorities(),
+                        null, userSearchForm.getPaging().getPageNo(),
+                        userSearchForm.getPaging().getPageSize());
+                model.addAttribute("users", users);
+            }
+            else{
+                int pageTotal=0;
+                userSearchForm.getPaging().setPageTotal(pageTotal);
+            }
+
         }
         else{
+
             //List<User> users =userMapper.findall();
             userSearchForm.getPaging().setPageTotal(0);
             //model.addAttribute("users", users);
@@ -178,11 +193,14 @@ public class UserController {
     }
     @ModelAttribute("authorityList")
     public List<String> getAuthorityList() {
+        System.out.println("getAuthorityList() 被执行");
         List<String> authorityList = new ArrayList<String>();
-        authorityList.add("读");
-        authorityList.add("写");
+        authorityList.add("读取");
+        authorityList.add("添加");
+        authorityList.add("修改");
         authorityList.add("删除");
         return authorityList;
+
     }
     @GetMapping("/del")
     public ModelAndView del(ModelAndView view, @RequestParam long id) {
@@ -190,5 +208,37 @@ public class UserController {
         view.setViewName("redirect:list");
         return view;
     }
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("loginForm", new LoginForm());
+        return "user/login";
+    }
+
+
+    @PostMapping("/login")
+    public String login(@Valid LoginForm loginForm, BindingResult bindingResult, RedirectAttributes attr, HttpSession httpSession) {
+        System.out.println(loginForm);
+        if (!bindingResult.hasErrors()){
+            try {
+                User user=userMapper.getUserByAccount(loginForm.getUsername());
+                if (user!=null&&user.getPassword().equals(loginForm.getPassword())){
+                    httpSession.setAttribute("user",user);
+                    attr.addAttribute("id",user.getId());
+                    return "redirect:detail";
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+
+            }
+            bindingResult.reject("login.failed","登录失败");
+        }
+        return "user/login";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession httpSession) {
+        httpSession.removeAttribute("user");
+        return "redirect:login";
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.example.springmvcexample.mybatis.entity;
 
 import java.sql.Date;
 
+import com.example.springmvcexample.constraint.PhoneNumber;
 import com.fasterxml.jackson.annotation.JsonView;
 
 public class Employee {
@@ -12,6 +13,7 @@ public class Employee {
     String firstName;
     String lastName;
     String email;
+    @PhoneNumber
     String phoneNumber;
     Date hireDate;
     Job job = new Job();

@@ -100,7 +100,9 @@
                 <th>生日</th>
                 <th>月薪</th>
                 <th>权限</th>
-                <th><a th:href="@{addchg}" href="form.html ">添加</a></th>
+                <th:block th:if="${#arrays.contains(session.user.authorities, '添加')}">>
+                    <a th:href="@{addchg}" href=" ">添加</a>
+                </th:block>
             </tr>
             </thead>
             <tr th:each="user,stat : ${users}">
