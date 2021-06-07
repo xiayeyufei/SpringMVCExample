@@ -2,11 +2,9 @@ package com.example.springmvcexample.form;
 
 import com.example.springmvcexample.mybatis.entity.Department;
 import com.example.springmvcexample.mybatis.entity.Job;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -17,11 +15,12 @@ public class EmployeeSearchForm {
     private String last_name;
     @Size(min = 0, max = 6)
     private String email;
-
     private String phoneNumber;
-
+    @Past(message = "{userSearchForm.startBirthday.error}")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate starthiredate;
-
+    @PastOrPresent(message = "{userSearchForm.endBirthday.error}")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endhiredate;
     @Max(30000)
     @Min(0)
@@ -43,18 +42,8 @@ public class EmployeeSearchForm {
     public void setManagerId(Integer managerId) {
         this.managerId = managerId;
     }
-
-    public String getDepartName() {
-        return departName;
-    }
-
-    public void setDepartName(String departName) {
-        this.departName = departName;
-    }
-
     private Double commissionPct;
     private Integer managerId;
-    private String departName;
     public Double getMinSalary() {
         return minSalary;
     }
@@ -92,7 +81,16 @@ public class EmployeeSearchForm {
     }
 
     private String job;
-    private String department;
+    private String departmentname;
+
+    public String getDepartmentname() {
+        return departmentname;
+    }
+
+    public void setDepartmentname(String departmentname) {
+        this.departmentname = departmentname;
+    }
+
     private Paging paging=new Paging();
 
     public Paging getPaging() {
@@ -144,11 +142,4 @@ public class EmployeeSearchForm {
         this.job = job;
     }
 
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
 }

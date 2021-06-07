@@ -83,7 +83,7 @@
 			<if test="phone_number !=null"> AND e.phone_number LIKE CONCAT('%',#{phone_number},'%')</if>
 			<if test="starthire_date != null">AND e.hire_date &gt;= #{starthire_date}</if>
 			<if test="endhire_date != null">AND e.hire_date &lt; #{endhire_date}</if>
-			<if test="job !=null"> AND j.job_title LIKE CONCAT('%',#{job},'%')</if>
+			<if test="job !=null and job !=''"> AND j.job_title = #{job}</if>
 			<if test="minSalary != null">AND e.salary &gt;= #{minSalary}</if>
 			<if test="maxSalary != null">AND e.salary &lt; #{maxSalary}</if>
 			<if test="commission_pct !=null"> AND e.commission_pct LIKE CONCAT('%',#{commission_pct},'%')</if>

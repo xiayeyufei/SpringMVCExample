@@ -2,9 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <script src="../../static/bootstrap/js/jquery-3.4.1.min.js" th:src="@{/bootstrap/js/jquery-3.4.1.min.js}"></script>
+    <script src="../../static/bootstrap/js/popper.min.js" th:src="@{/bootstrap/js/popper.min.js}"></script>
+    <script src="../../static/bootstrap/js/bootstrap.bundle.min.js"
+            th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <title>用户详细信息</title>
+    <style>
+        caption {
+            padding-top: 1rem; padding-bottom: 1rem; color: #343A40;
+            font-size: 1.1em; font-weight: bolder; text-align: center;
+            caption-side: top;
+        }
+
+        th {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-
+<table th:object="${employee}"  align="center" border="1">
+    <caption style="caption-side: top" align="center">用户信息</caption>
+    <tr>
+        <td>主键：</td>
+        <td th:text="*{id}">1001</td>
+    <tr>
+    <tr>
+        <td>姓氏：</td>
+        <td th:text="*{firstName}">1001</td>
+    <tr>
+    <tr>
+        <td>名称：</td>
+        <td th:text="*{lastName}">1001</td>
+    <tr>
+    <tr>
+        <td>邮箱：</td>
+        <td th:text="*{email}">1001</td>
+    <tr>
+    <tr>
+        <td>电话号码：</td>
+        <td th:text="*{phoneNumber}">1001</td>
+    <tr>
+    <tr>
+        <td>工作：</td>
+        <td th:text="*{job.title}">1001</td>
+    <tr>
+    <tr>
+        <td>部门：</td>
+        <td th:text="*{department.name}">1001</td>
+    <tr>
+    <tr>
+        <td>雇佣日期：</td>
+        <td th:text="*{hireDate}">1001</td>
+    <tr>
+    <tr>
+        <td>工资：</td>
+        <td th:text="${#numbers.formatDecimal(employee.salary,0,2)}">1001</td>
+    <tr>
+    <tr>
+        <td colspan="2" align="center"><a th:href="@{list}">返回</a></td>
+    </tr>
+</table>
 </body>
 </html>

@@ -20,7 +20,7 @@
 			<result property="manager" column="manager_id" />
 			<association property="job" resultMap="JobResult" />
 			<association property="department" column="department_id"
-				select="com.example.springmvc.mybatis.mapper.DepartmentMapper.getDepartment" />
+				select="com.example.springmvcexample.mybatis.mapper.DepartmentMapper.getDepartment" />
 		</collection>
 	</resultMap>
 	<sql id="selectAll">

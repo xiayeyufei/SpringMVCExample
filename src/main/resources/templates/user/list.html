@@ -23,6 +23,13 @@
                         <div th:if="${#fields.hasErrors('account')}" th:errors="*{account}">账号错误</div>
                     </td>
                 </tr>
+                <select name="departmentCode" class="b_select" >
+                    <option value="">请选择</option>
+                    <option th:each="item:${departmentList}"
+                            th:value="${item.value}" th:text="${item.text}"
+                            th:selected="${userInfo.departmentCode==item.value}">
+                    </option>
+                </select>
                 <tr>
                     <td>姓名:</td>
                     <td><input type='text' th:field="*{name}" placeholder="请输入姓名" /></td>

@@ -86,7 +86,13 @@
         <tr>
             <td>工作:</td>
             <td>
-                <input type='text' th:field="*{job}" placeholder="工作" />
+                <select name="departmentCode" class="b_select" th:field="*{job}">
+                    <option value="" >请选择</option>
+                    <option th:each="item:${joblist}"
+                            th:value="${item.title}" th:text="${item.title}"
+                    >
+                    </option>
+                </select>
             </td>
             <td>
                 <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('job')}" th:errors="*{job}">工作错误</div>
@@ -104,10 +110,16 @@
         <tr>
             <td>部门:</td>
             <td>
-                <input type='text' th:field="*{department}" placeholder="部门" />
+                <select name="departmentCode" class="b_select" th:field="*{departmentname}">
+                    <option value="" >请选择</option>
+                    <option th:each="item:${dlist}"
+                            th:value="${item.name}" th:text="${item.name}"
+                    >
+                    </option>
+                </select>
             </td>
             <td>
-                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('department')}" th:errors="*{department}">部门错误</div>
+                <div style="color: red" class="col-auto" th:if="${#fields.hasErrors('departmentname')}" th:errors="*{departmentname}">部门错误</div>
             </td>
         </tr>
         <tr>
@@ -135,21 +147,29 @@
         <th>电话号码</th>
         <th>雇佣日期</th>
         <th>工作</th>
+        <th>薪资</th>
         <th>经理ID</th>
         <th>部门</th>
+        <th><a th:href="@{addchg}" href=" ">添加</a></th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="emp,stat:${employees}">
+    <tr th:each="employee,stat:${employees}">
         <td th:text="${stat.count}"></td>
-        <td th:text="${emp.firstName}"></td>
-        <td th:text="${emp.lastName}"></td>
-        <td th:text="${emp.email}"></td>
-        <td th:text="${emp.phoneNumber}"></td>
-        <td th:text="${emp.hireDate}"></td>
-        <td th:text="${emp.job.title}"></td>
-        <td th:text="${emp.manager}"></td>
-        <td th:text="${emp.department.name}"></td>
+        <td th:text="${employee.firstName}"></td>
+        <td th:text="${employee.lastName}"></td>
+        <td th:text="${employee.email}"></td>
+        <td th:text="${employee.phoneNumber}"></td>
+        <td th:text="${employee.hireDate}"></td>
+        <td th:text="${employee.job.title}"></td>
+        <td th:text="${#numbers.formatDecimal(employee.salary,0,2)}"></td>
+        <td th:text="${employee.manager}"></td>
+        <td th:text="${employee.department.name}"></td>
+        <td>
+            <a th:href="@{addchg(id=${employee.id})}" href=" ">修改</a>
+            <a href=" " th:href="@{del(id=${employee.id})}" onclick="return confirm('确实要删除 apple 吗?');"
+               th:onclick="return confirm('确实要删除 '+ [[${employee.firstName}]] +' '+ [[${employee.lastName}]] + '雇员吗?');">删除</a>
+        </td>
     </tr>
     </tbody>
 </table>

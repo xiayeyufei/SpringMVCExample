@@ -4,9 +4,101 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>雇员列表</title>
+    <title><th:block th:if="${employee.id == 0}">添加雇员</th:block>
+        <th:block th:if="${employee.id > 0}">修改雇员</th:block>
+    </title>
 </head>
+
 <body>
 
+<form th:object="${employee}" method='POST'>
+    <input type='hidden' th:field="*{id}">
+    <table>
+        <tr>
+            <th colspan="3" align="center" >
+                <th:block th:if="${employee.id == 0}">添加用户</th:block>
+                <th:block th:if="${employee.id > 0}">修改用户</th:block>
+            </th>
+        </tr>
+        <tr>
+            <td colspan="3" align="center">
+                <span th:if="${#fields.hasErrors('global')}" th:errors="*{global}">添加用户失败了</span>
+            </td>
+        </tr>
+        <tr>
+            <td>姓氏:</td>
+            <td><input type="text" th:field="*{firstName}" value="apple" placeholder="姓氏"></td>
+            <td><span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">姓氏错误</span></td>
+        </tr>
+        <tr>
+            <td>名称:</td>
+            <td><input type="text" th:field="*{lastName}" value="apple" placeholder="名称"></td>
+            <td><span class="col-auto" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">名称错误</span></td>
+        </tr>
+        <tr>
+            <td>邮箱:</td>
+            <td><input type="text" th:field="*{email}" value="apple" placeholder="邮箱"></td>
+            <td><span class="col-auto" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">邮箱错误</span></td>
+        </tr>
+        <tr>
+            <td>电话号码:</td>
+            <td><input type="text" th:field="*{phoneNumber}" value="apple" placeholder="电话号码"></td>
+            <td><span style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">电话号码错误</span></td>
+        </tr>
+
+        <tr>
+            <td>雇佣日期:</td>
+            <td>
+                <input type='text' th:field="*{hireDate}" placeholder="雇佣日期" />
+            </td>
+            <td>
+                <span style="color: red" th:if="${#fields.hasErrors('hireDate')}" th:errors="*{hireDate}">雇佣日期错误</span>
+            </td>
+        </tr>
+        <tr>
+            <td>工作:</td>
+            <td>
+                <select name="departmentCode" class="b_select" th:field="*{job.id}">
+                    <option value="" >请选择</option>
+                    <option th:each="item:${joblist}"
+                            th:value="${item.id}" th:text="${item.title}"
+                    >
+                    </option>
+                </select>
+            </td>
+            <td><span th:if="${#fields.hasErrors('job')}" th:errors="*{job}">工作</span></td>
+        </tr>
+        <tr>
+            <td>月薪:</td>
+            <td>
+                <input type='text' th:field="*{salary}" placeholder="月薪" />
+            </td>
+            <td>
+                <span th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}">月薪错误</span>
+            </td>
+        </tr>
+        <tr>
+            <td>经理ID:</td>
+            <td><input type="text" th:field="*{manager}" value="apple" placeholder="经理ID"></td>
+            <td><span th:if="${#fields.hasErrors('manager')}" th:errors="*{manager}">经理ID错误</span></td>
+        </tr>
+        <tr>
+            <td>部门:</td>
+            <td>
+                <select name="departmentCode" class="b_select" th:field="*{department.id}">
+                    <option value="" >请选择</option>
+                    <option th:each="item:${dlist}"
+                            th:value="${item.id}" th:text="${item.name}"
+                    >
+                    </option>
+                </select>
+            </td>
+            <td><span th:if="${#fields.hasErrors('department')}" th:errors="*{department}">部门错误</span></td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center"><input name="search" type="submit" value="确定" /></td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>
