@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>原型对象</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Person(firstName, lastName, age, gender, interests) {
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.age = age;
+			this.gender = gender;
+			this.interests = interests;
+			if (typeof Person._initialized == "undefined") {
+				Person.prototype.bio = function() {
+					return this.firstName + ' ' + this.lastName + ' is '
+							+ this.age + ' years old. He likes '
+							+ this.interests[0] + ' and ' + this.interests[1]
+							+ '.';
+				};
+				Person.prototype.greeting = function() {
+					return 'Hi! I\'m ' + this.firstName + ' ' + this.lastName
+							+ '.';
+				};
+				Person._initialized = true;
+			}
+		}
+		const person01 = new Person('Bob', 'Smith', 32, 'male', [ 'music',
+				'skiing' ]);
+		const person02 = new Person('Louise', 'Doran', 28, 'female', [
+				'singing', 'reading' ]);
+		console.log(person01.bio());
+		console.log(person02.bio());
+		console.log(person01.bio === person02.bio);
+	</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>异常处理</title>
+</head>
+<body>
+	<script type="text/javascript">
+		try {
+			notdefinedfunc("调用未定义函数");
+		} catch (err) {
+			console.log(err);
+		}
+
+		try {
+			throw "Whoops!";
+			//throw new Error("Whoops!");
+		} catch (err) {
+			console.log(err);
+		}
+	</script>
+</body>
+</html>

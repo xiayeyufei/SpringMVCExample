@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>函数</title>
+</head>
+<body>
+	<script type="text/javascript">
+	function calcRectArea(width, height){
+		return width * height;
+	}
+	console.log(calcRectArea(5, 6)); // 30
+	
+	function* idMaker() {
+		var index = 0;
+		while (true)
+			yield index++;
+	}
+	var gen = idMaker();
+	console.log(gen.next().value); // 0
+	console.log(gen.next().value); // 1
+	console.log(gen.next().value); // 2
+	console.log(gen.next().value); // 3
+	</script>
+</body>
+</html>

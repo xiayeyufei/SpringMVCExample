@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="4.4.1/css/bootstrap.min.css">
+<script src="jquery-3.4.1.min.js"></script>
+<script src="popper.min.js"></script>
+<script src="4.4.1/js/bootstrap.bundle.min.js"></script>
+<title>内联布局表单</title>
+</head>
+<body>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<h3>内联布局表单</h3>
+		</div>
+		<div class="row justify-content-center">
+			<form class="form-inline col-9">
+				<label for="account">账号：</label> 
+				<input type="text" class="form-control" id="account" placeholder="请输入账号"> 
+				<label for="passwd" class="ml-2">密码：</label>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">@</div>
+					</div>
+					<input type="text" class="form-control" id="passwd" placeholder="请输入密码">
+				</div>
+				<div class="form-check ml-2">
+					<input class="form-check-input" type="checkbox" id="rememberme"> 
+					<label class="form-check-label" for="rememberme">记住密码</label>
+				</div>
+				<button type="submit" class="btn btn-primary btn-sm ml-2">登录</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

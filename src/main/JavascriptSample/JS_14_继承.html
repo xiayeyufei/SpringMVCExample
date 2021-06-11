@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>继承</title>
+</head>
+<body>
+	<script type="text/javascript">
+function Person(firstName, lastName, age, gender, interests) {
+	this.firstName = firstName; this.lastName = lastName; this.age = age; this.gender = gender; this.interests = interests;
+	if (typeof Person._initialized == "undefined") {
+		Person.prototype.bio = function() {
+			return this.firstName+' '+this.lastName+' is '+this.age+' years old. He likes '+this.interests[0]+' and '+this.interests[1]+ '.';
+		};
+		Person.prototype.greeting = function() { return 'Hi! I\'m ' + this.firstName + ' ' + this.lastName + '.';};
+		Person._initialized = true;
+	}
+}
+function Teacher(firstName, lastName, age, gender, interests, subject) {
+	Person.call(this, firstName, lastName, age, gender, interests);
+	this.subject = subject;
+	if (typeof Teacher._initialized == "undefined") {
+		Teacher.prototype.greeting = function() { return Person.prototype.greeting.call(this) + 'Your subject is ' + this.subject + ".";};
+		Teacher._initialized = true;
+	}
+}
+Teacher.prototype = Object.create(Person.prototype);
+Teacher.prototype.constructor = Teacher;
+const teacher = new Teacher('Bob', 'Smith', 32, 'male', [ 'music','skiing' ], 'chinese');
+console.log(teacher); console.log(teacher.greeting());
+console.log(`teacher instanceof Teacher = ${teacher instanceof Teacher}`);
+console.log(`teacher instanceof Person = ${teacher instanceof Person}`);
+	</script>
+</body>
+</html>

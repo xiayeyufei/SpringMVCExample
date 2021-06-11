@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="4.4.1/css/bootstrap.min.css">
+<script src="jquery-3.4.1.min.js"></script>
+<script src="popper.min.js"></script>
+<script src="4.4.1/js/bootstrap.bundle.min.js"></script>
+<title>复杂网格布局表单</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<form class="col-6 offset-3 mt-5">
+				<div class="form-group form-row justify-content-center">
+					<span class="h3">复杂网格布局表单</span>
+				</div>
+				<div class="form-group form-row">
+					<label for="id" class="col-2 col-form-label">主键</label>
+					<div class="col">
+						<input type="text" class="form-control-plaintext" readonly id="id" value="10000">
+					</div>
+				</div>
+				<div class="form-group form-row">
+					<label for="account" class="col-2 col-form-label">账号</label>
+					<div class="col-4">
+						<input type="text" class="form-control" id="account">
+					</div>
+					<label for="password" class="col-2 col-form-label">密码</label>
+					<div class="col-4">
+						<input type="password" class="form-control" id="password">
+					</div>
+				</div>
+				<div class="form-group form-row  align-items-center">
+					<label class="col-form-label col-2">性别</label>
+					<div class="col-3">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="sex" id="sex1" value="男" checked> <label class="form-check-label" for="sex1">男</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="sex" id="sex2" value="女"> <label class="form-check-label" for="sex2">女</label>
+						</div>
+					</div>
+					<label class="col-form-label col-2">爱好</label>
+					<div class="col-5">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="hobby" id="hobby1" value="足球" checked> <label class="form-check-label" for="hobby1">足球</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="hobby" id="hobby2" value="篮球"> <label class="form-check-label" for="hobby2">篮球</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="hobby" id="hobby3" value="排球" checked> <label class="form-check-label" for="hobby3">排球</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group form-row">
+					<label for="age" class="col-3 col-form-label">年龄</label>
+					<div class="col-8 align-self-center">
+						<input type="range" class="form-control-range" id="age">
+					</div>
+					<label class="col-1 col-form-label">25</label>
+				</div>
+				<div class="form-group form-row">
+					<label for="email" class="col-3 col-form-label">邮件</label>
+					<div class="col">
+						<input type="email" class="form-control" id="email" aria-describedby="emailHelp"> <small id="emailHelp" class="form-text text-muted">永远不要与他人共享你的邮箱。</small>
+					</div>
+				</div>
+				<div class="form-group form-row">
+					<label for="cicty" class="col-3 col-form-label">城市</label>
+					<div class="col">
+						<select class="form-control" id="city">
+							<option>沈阳</option>
+							<option>北京</option>
+							<option>上海</option>
+							<option>广州</option>
+							<option>深圳</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group form-row">
+					<label for="profile" class="col-3 col-form-label">个人简介</label>
+					<div class="col">
+						<textarea class="form-control" id="profile" rows="3"></textarea>
+					</div>
+				</div>
+				<div class="form-group form-row">
+					<label for="photo" class="col-3 col-form-label">照片</label>
+					<div class="col align-self-center">
+						<input type="file" class="form-control-file" id="photo">
+					</div>
+				</div>
+				<div class="form-group form-row justify-content-center">
+					<div class="col-3 text-center">
+						<button type="submit" class="btn btn-info">确定</button>
+					</div>
+					<div class="col-3 text-center">
+						<button type="reset" class="btn btn-info">重置</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

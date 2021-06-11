@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>原型对象</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Person(name, sex) {
+			this.name = name;
+			Person.prototype.sex = sex;
+		}
+		const p01 = new Person('Bob Smith', 'male');
+		const p02 = new Person('Louise Doran', 'female');
+		console.log("p01.name=" + p01.name + ",p01.sex=" + p01.sex);
+		console.log("p02.name=" + p02.name + ",p02.sex=" + p02.sex);
+		console.log(p01.__proto__);
+		console.log(p01.__proto__ == p02.__proto__);
+		console.log(p02.__proto__.__proto__ == Object.prototype);
+		console.log(Object.prototype.__proto__);
+	</script>
+</body>
+</html>

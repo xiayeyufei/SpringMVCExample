@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>HTML EVENT</title>
+<script type="text/javascript">
+	function switchBulb() {
+		bulb = document.getElementById("bulb");
+		if (bulb.src.endsWith("bulboff.gif"))
+			bulb.src = "bulbon.gif";
+		else
+			bulb.src = "bulboff.gif";
+	}
+</script>
+</head>
+<body>
+	<h2 id="title" align="center" style="margin: 0px; padding: 0px;"></h2>
+	<div style="width: 100%; height: 190px; display: flex; justify-content: center; align-items: center;">
+		<img id="bulb" border="0" src="./bulboff.gif" onclick="switchBulb()">
+	</div>
+	<script type="text/javascript">
+		document.getElementById("title").innerText = "演示开关灯";
+	</script>
+</body>
+</html>

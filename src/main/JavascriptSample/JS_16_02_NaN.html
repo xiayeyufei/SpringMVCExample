@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>NaN</title>
+</head>
+<body>
+	<script type="text/javascript">
+		console.log(NaN === NaN); // false
+		console.log(Number.NaN === NaN); // false
+		console.log(isNaN(NaN)); // true
+		console.log(isNaN(Number.NaN)); // true
+
+		function valueIsNaN(v) {
+			return v !== v;
+		}
+		console.log(valueIsNaN(1)); // false
+		console.log(valueIsNaN(NaN)); // true
+		console.log(valueIsNaN(Number.NaN)); // true
+
+		console.log(isNaN('hello world')); // true
+		console.log(Number.isNaN('hello world')); // false
+		console.log(Number.isNaN(NaN)); // false
+	</script>
+</body>
+</html>

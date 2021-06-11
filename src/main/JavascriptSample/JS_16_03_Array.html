@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Array</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var fruits = [ 'Apple', 'Banana' ]; // 创建数组
+		//var fruits = new Array('Apple', 'Banana');
+		fruits[4] = 'Mango'; // 添加或修改索引处的元素
+		console.log(fruits.length); // 获取数组长度
+		console.log(fruits[0]); // 访问索引0处的元素
+		console.log(fruits[fruits.length - 1]); // 访问最后一个元素
+		for (var i = 0; i < fruits.length; i++) { // 遍历数组
+			console.log(`${fruits[i]},${i}`);
+		}
+		fruits.forEach(function(item, index, array) { // 遍历数组，忽略 undefined
+			console.log(item, index);
+		});
+		fruits.push('Orange'); // 末尾添加元素
+		fruits.unshift('Strawberry'); //头部添加元素
+		fruits.pop(); // 删除末尾元素
+		fruits.shift(); // 删除头部元素
+		fruits.indexOf('Banana'); // 查找元素的索引
+		fruits.splice(1, 2); // 从一个索引位置删除多个元素
+		var shallowCopy = fruits.slice(); // 复制一个数组
+		console.log(shallowCopy);
+	</script>
+</body>
+</html>

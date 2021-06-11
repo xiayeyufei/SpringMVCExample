@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>数据类型</title>
+<style>
+caption {
+	font-size: 1.5em; font-weight: bolder;
+}
+
+td {
+	padding-left: 10px; padding-right: 10px;
+}
+</style>
+</head>
+<body>
+	<table border="1" align="center">
+		<caption>Javascript中的基本数据类型</caption>
+		<tr>
+			<th>名称</th>
+			<th>示例</th>
+			<th>返回值</th>
+		</tr>
+		<tr>
+			<td rowspan="2">字符串</td>
+			<td>typeof "Hello";</td>
+			<td><script type="text/javascript">
+				document.write(typeof "Hello");
+			</script></td>
+		</tr>
+		<tr>
+			<td>typeof 'Hello';</td>
+			<td><script type="text/javascript">
+				document.write(typeof 'Hello');
+			</script></td>
+		</tr>
+		<tr>
+			<td rowspan="2">数值</td>
+			<td>typeof 9999;</td>
+			<td><script type="text/javascript">
+				document.write(typeof 9999);
+			</script></td>
+		</tr>
+		<tr>
+			<td>typeof 9999.98;</td>
+			<td><script type="text/javascript">
+				document.write(typeof 9999.98);
+			</script></td>
+		</tr>
+		<tr>
+			<td rowspan="2">布尔</td>
+			<td>typeof true;</td>
+			<td><script type="text/javascript">
+				document.write(typeof true);
+			</script></td>
+		</tr>
+		<tr>
+			<td>typeof false;</td>
+			<td><script type="text/javascript">
+				document.write(typeof false);
+			</script></td>
+		</tr>
+		<tr>
+			<td rowspan="2">对象</td>
+			<td>typeof new Object();</td>
+			<td><script type="text/javascript">
+				document.write(typeof new Object());
+			</script></td>
+		</tr>
+		<tr>
+			<td>typeof null;</td>
+			<td><script type="text/javascript">
+				document.write(typeof null);
+			</script></td>
+		</tr>
+		<tr>
+			<td>未定义</td>
+			<td>var temp; typeof temp;</td>
+			<td><script type="text/javascript">
+				var temp;
+				typeof temp;
+				document.write(typeof temp);
+			</script></td>
+		</tr>
+	</table>
+	<script type="text/javascript">
+		console.log(undefined == null);
+	</script>
+</body>
+</html>

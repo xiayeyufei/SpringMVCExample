@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>HTML DOM</title>
+<style>
+p {text-align: center;}
+</style>
+</head>
+<body>
+	<p id="p1">Hello world!</p>
+	<p id="p2"></p>
+	<script type="text/javascript">
+		p1 = document.getElementById("p1");
+		p2 = document.getElementById("p2");
+		p2.innerHTML = p1.innerHTML;
+		p2.style.backgroundColor = "lightgrey";
+		p2.style.fontWeight = "bolder";
+		p2.style.fontSize = "2em";
+	</script>
+</body>
+</html>

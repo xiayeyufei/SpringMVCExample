@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>创建单一对象</title>
+</head>
+<body>
+	<script type="text/javascript">
+		const person = {
+			firstName : 'Bob',
+			lastName : 'Smith',
+			age : 32,
+			gender : 'male',
+			interests : [ 'music', 'skiing' ],
+			bio : function() {
+				return this.firstName + ' ' + this.lastName + ' is ' + this.age
+						+ ' years old. He likes ' + this.interests[0] + ' and '
+						+ this.interests[1] + '.';
+			},
+			greeting : function() {
+				return 'Hi! I\'m ' + this.firstName + ' ' + this.lastName + '.';
+			}
+		};
+		console.log(person.bio());
+		console.log(person.greeting());
+		person.address = "San Francisco";
+		console.log(person.address);
+		delete person.address;
+		console.log(person.address);
+
+		const anotherPerson = Object.create(person);
+		anotherPerson.firstName = 'Peter';
+		anotherPerson.lastName = 'Hall';
+		console.log(anotherPerson.bio());
+		console.log(anotherPerson.greeting());
+	</script>
+</body>
+</html>

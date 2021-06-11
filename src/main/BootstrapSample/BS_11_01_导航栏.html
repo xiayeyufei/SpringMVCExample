@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="4.4.1/css/bootstrap.min.css">
+<script src="jquery-3.4.1.min.js"></script>
+<script src="popper.min.js"></script>
+<script src="4.4.1/js/bootstrap.bundle.min.js"></script>
+<title>导航栏</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row mt-5">
+			<h3>导航栏和下拉菜单</h3>
+		</div>
+		<div class="row row-cols-1">
+<ul class="nav">
+	<!-- justify-content-center justify-content-end flex-column nav-fill nav-justified -->
+	<li class="nav-item border border-secondary ml-1"><a class="nav-link" href="#">首页</a></li>
+	<li class="nav-item border border-secondary ml-1"><a class="nav-link" href="#">科技</a></li>
+	<li class="nav-item border border-secondary ml-1"><a class="nav-link" href="#">体育</a></li>
+	<li class="nav-item border border-secondary dropdown ml-1">
+		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"">时尚</a>
+		<div class="dropdown-menu">
+			<a class="dropdown-item" href="#">女人</a>
+			<a class="dropdown-item" href="#">教育</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#">亲子</a>
+		</div>
+	</li>
+</ul>
+		</div>
+		<div class="row mt-5">
+			<h3>导航栏水平选项卡</h3>
+		</div>
+		<div class="row row-cols-1">
+<ul class="nav nav-pills" role="tablist">
+	<li class="nav-item"><a class="nav-link active" data-toggle="pill" href="#java1" role="tab">JAVA</a></li>
+	<li class="nav-item"><a class="nav-link" data-toggle="pill" href="#python1" role="tab">PYTHON</a></li>
+	<li class="nav-item"><a class="nav-link" data-toggle="pill" href="#oracle1" role="tab">ORACLE</a></li>
+	<li class="nav-item"><a class="nav-link" data-toggle="pill" href="#mysql1" role="tab">MYSQL</a></li>
+</ul>
+<div class="tab-content border border-secondary">
+	<div class="tab-pane active" id="java1" role="tabpanel">Java</div>
+	<div class="tab-pane" id="python1" role="tabpanel">Python</div>
+	<div class="tab-pane" id="oracle1" role="tabpanel">Oracle</div>
+	<div class="tab-pane" id="mysql1" role="tabpanel">MySQL</div>
+</div>
+		</div>
+		<div class="row mt-5">
+			<h3>导航栏垂直选项卡</h3>
+		</div>
+<div class="row">
+	<div class="col-3">
+		<ul class="nav nav-pills flex-column" role="tablist">
+			<li class="nav-item"><a class="nav-link active" data-toggle="pill" href="#java2" role="tab">JAVA</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="pill" href="#python2" role="tab">PYTHON</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="pill" href="#oracle2" role="tab">ORACLE</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="pill" href="#mysql2" role="tab">MYSQL</a></li>
+		</ul>
+	</div>
+	<div class="col-9 border border-secondary">
+		<div class="tab-content">
+			<div class="tab-pane active" id="java2" role="tabpanel">Java</div>
+			<div class="tab-pane" id="python2" role="tabpanel">Python</div>
+			<div class="tab-pane" id="oracle2" role="tabpanel">Oracle</div>
+			<div class="tab-pane" id="mysql2" role="tabpanel">MySQL</div>
+		</div>
+	</div>
+</div>
+
+	</div>
+</body>
+</html>

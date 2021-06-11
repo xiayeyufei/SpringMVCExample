@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>HTML ONLOAD</title>
+<script type="text/javascript">
+	function init() {
+		document.getElementById("buttonSetTitle").onclick=setTitle;
+	}
+	function setTitle() {
+		document.getElementById("title").innerText = "Hello world. " + Math.round(Math.random()*100000);
+	}
+</script>
+</head>
+<body onload="init()">
+	<center><button id="buttonSetTitle">设置标题</button></center>
+	<h2 id="title" align="center" style="margin: 0px; padding: 0px;">点击按钮此段文字会被改变</h2>
+</body>
+</html>

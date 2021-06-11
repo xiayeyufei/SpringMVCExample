@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="jquery-ui.min.css">
+<script src="jquery-3.4.1.min.js"></script>
+<script src="popper.min.js"></script>
+<script src="4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="jquery-ui.min.js"></script>
+<script>
+	$(function() {
+		$.datepicker.regional['zh-CN'] = {
+			closeText : '关闭',
+			prevText : '&#x3c;上月',
+			nextText : '下月&#x3e;',
+			currentText : '今天',
+			monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月' ],
+			monthNamesShort : [ '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二' ],
+			dayNames : [ '星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六' ],
+			dayNamesShort : [ '周日', '周一', '周二', '周三', '周四', '周五', '周六' ],
+			dayNamesMin : [ '日', '一', '二', '三', '四', '五', '六' ],
+			weekHeader : '周',
+			dateFormat : 'yy-mm-dd',
+			firstDay : 1,
+			isRTL : false,
+			showMonthAfterYear : true,
+			yearSuffix : '年'
+		};
+		$.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+		$("#hire_date").datepicker();
+	});
+</script>
+<title>表单验证信息</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<form id="demoForm" class="col-6 offset-3 mt-5">
+				<div class="form-group row justify-content-center">
+					<span class="h3">表单验证信息</span>
+				</div>
+				<div class="form-group form-row">
+					<label for="account" class="col-3 col-form-label">账号</label>
+					<div class="col row align-items-center">
+						<input type="text" class="col-8 form-control" id="account" placeholder="请输入账号" value="root">
+						<div class="col form-text text-danger small font-weight-bolder">账号无效</div>
+					</div>
+				</div>
+				<div class="form-group form-row">
+					<label for="password" class="col-3 col-form-label">密码</label>
+					<div class="col row align-items-center">
+						<input type="password" class="col-8 form-control" id="password" placeholder="请输入密码">
+						<div class="col form-text text-danger small font-weight-bolder">密码无效</div>
+					</div>
+				</div>
+				<div class="form-group form-row">
+					<label for="password" class="col-3 col-form-label">确认密码</label>
+					<div class="col row align-items-center">
+						<input type="password" class="col-8 form-control" id="confirmPassword" placeholder="请输入确认密码">
+						<div class="col form-text text-danger small font-weight-bolder">确认密码无效</div>
+					</div>
+				</div>
+				<div class="form-group form-row">
+					<label for="hire_date" class="col-3 col-form-label">入职日期</label>
+					<div class="col row align-items-center">
+						<input type="text" class="col-5 form-control" id="hire_date" placeholder="请输入入职日期">
+						<div class="col form-text text-danger small font-weight-bolder">入职日期无效</div>
+					</div>
+				</div>
+				<div class="form-group form-row">
+					<label for="salary" class="col-3 col-form-label">月薪</label>
+					<div class="col row align-items-center">
+						<input type="number" class="col-5 form-control" id="salary" placeholder="请输入年龄" value="2000.00" min="1500" max="15000" step="0.01">
+						<div class="col form-text text-danger small font-weight-bolder">月薪无效</div>
+					</div>
+				</div>
+				<div class="form-group form-row">
+					<label for="email" class="col-3 col-form-label">邮件</label>
+					<div class="col row align-items-center">
+						<input type="email" class="col-8 form-control" id="email" placeholder="请输入邮件" aria-describedby="emailHelp">
+						<div class="col form-text text-danger small font-weight-bolder">邮件无效</div>
+						<small id="emailHelp" class="form-text text-muted">永远不要与他人共享你的邮箱。</small>
+
+					</div>
+				</div>
+				<div class="form-group form-row justify-content-center">
+					<div class="col-3 text-center">
+						<button type="submit" class="btn btn-sm btn-info text-white font-weight-bolder">注册</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
